@@ -1,0 +1,2122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#00B386">
+    <title>Regnum Digital | Admin Master</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --page: #F0F2F5; --surface: #FFFFFF; --surface2: #FAFBFC;
+            --brand: #00B386; --brand-dk: #009970; --brand-bg: #E6FAF5; --brand-bd: #B3EFE0;
+            --blue: #3557FF; --blue-bg: #EEF2FF;
+            --red: #EF4444; --red-bg: #FEF2F2;
+            --amber: #F59E0B; --amber-bg: #FFFBEB;
+            --purple: #8b5cf6; --purple-bg: #f3e8ff;
+            --txt-1: #0F172A; --txt-2: #334155; --txt-3: #64748B; --txt-4: #94A3B8;
+            --border: #E2E8F0; --border2: #F1F5F9;
+            --sh1: 0 1px 3px rgba(15,23,42,.06); --sh2: 0 4px 20px rgba(15,23,42,.08);
+            --r: 12px; --r-sm: 8px; --r-pill: 999px;
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 14px; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'DM Sans', sans-serif; background: var(--page); color: var(--txt-1); min-height: 100vh; overflow-x: hidden; }
+        button { font-family: 'DM Sans', sans-serif; cursor: pointer; border: none; outline: none; transition: 0.2s; }
+        .hidden { display: none !important; }
+        svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .btn-cta { background: var(--brand); color: #fff; padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 2px 8px rgba(0,179,134,.2); }
+        .btn-cta:hover { background: var(--brand-dk); }
+        .btn-cta:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn-outline { background: var(--surface); color: var(--txt-2); padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 13px; border: 1px solid var(--border); display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-outline:hover { background: var(--border2); color: var(--txt-1); }
+        .form-group { margin-bottom: 16px; text-align: left; }
+        .form-group label { display: block; font-size: 12.5px; font-weight: 600; color: var(--txt-2); margin-bottom: 6px; }
+        .form-control { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; outline: none; background: var(--surface2); color: var(--txt-1); font-family: 'DM Sans', sans-serif; transition: 0.2s; }
+        .form-control:focus { border-color: var(--brand); background: var(--surface); box-shadow: 0 0 0 3px var(--brand-bg); }
+        .grid-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; align-items: start; }
+        .grid-2-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .app-layout { display: flex; min-height: 100vh; width: 100%; }
+        .sidebar { width: 240px; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; position: fixed; top: 0; left: 0; bottom: 0; z-index: 200; }
+        .main { margin-left: 240px; flex: 1; display: flex; flex-direction: column; min-height: 100vh; width: calc(100% - 240px); }
+        .content { padding: 24px; max-width: 1200px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; flex: 1; }
+        .sb-logo { padding: 22px 20px 18px; border-bottom: 1px solid var(--border2); display: flex; align-items: center; gap: 10px; }
+        .sb-logomark { width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(135deg, var(--brand), var(--brand-dk)); display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 13px; color: #fff; flex-shrink: 0; }
+        .sb-name { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 14.5px; color: var(--txt-1); line-height: 1.2; flex: 1; }
+        .sb-nav { flex: 1; overflow-y: auto; padding: 12px 0; }
+        .sb-sec { font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; font-weight: 700; color: var(--txt-4); padding: 16px 20px 6px; }
+        .nav-item { display: flex; align-items: center; padding: 10px 20px; color: var(--txt-3); font-size: 13px; font-weight: 500; cursor: pointer; border-left: 3px solid transparent; gap: 10px; }
+        .nav-item:hover { background: var(--border2); color: var(--txt-1); }
+        .nav-item.active { background: var(--brand-bg); color: var(--brand); border-left-color: var(--brand); font-weight: 600; }
+        .sb-bottom { padding: 14px 12px; border-top: 1px solid var(--border2); }
+        .sb-out { display: flex; align-items: center; gap: 8px; color: var(--red); font-size: 13px; font-weight: 600; cursor: pointer; padding: 10px 12px; border-radius: 6px; background: var(--red-bg); }
+        .topbar { position: sticky; top: 0; z-index: 100; height: 60px; background: rgba(255,255,255,.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 24px; justify-content: space-between; }
+        .tb-title { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; color: var(--txt-1); }
+        .auth-wrapper { display: flex; min-height: 100vh; background: var(--surface); width: 100%; }
+        .auth-left { flex: 1; background: linear-gradient(135deg, #1e1b4b, #3b0764); color: #fff; display: flex; flex-direction: column; justify-content: center; padding: 60px; }
+        .auth-right { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px; background: var(--page); }
+        .auth-box { width: 100%; max-width: 420px; background: var(--surface); padding: 40px; border-radius: var(--r); box-shadow: var(--sh2); border: 1px solid var(--border); text-align: left; }
+        .otp-inputs { display: flex; gap: 10px; margin-bottom: 24px; justify-content: space-between; }
+        .otp-inputs input { width: calc(25% - 8px); aspect-ratio: 1/1; text-align: center; font-size: 24px; font-weight: 700; border: 2px solid var(--border); border-radius: 8px; outline: none; }
+        .otp-inputs input:focus { border-color: var(--brand); }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 24px; box-shadow: var(--sh1); margin-bottom: 24px; }
+        .card-title { font-family: 'Sora', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 4px; color: var(--txt-1); }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--txt-3); font-size: 11.5px; font-weight: 600; text-transform: uppercase; background: var(--surface2); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 13.5px; color: var(--txt-2); }
+        .badge { padding: 4px 10px; border-radius: var(--r-pill); font-size: 11px; font-weight: 700; display: inline-flex; }
+        .sb-close { display: none; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 6px; background: var(--surface2); cursor: pointer; color: var(--txt-2); border: 1px solid var(--border); }
+        .mobile-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15,23,42,0.4); backdrop-filter: blur(2px); z-index: 199; opacity: 0; visibility: hidden; transition: 0.3s ease; }
+        .mobile-overlay.open { opacity: 1; visibility: visible; }
+        .mobile-logo { display: none; }
+        .mobile-menu-btn { display: none; }
+        .bottom-nav { display: none; }
+        .perm-cb { width: 18px; height: 18px; accent-color: var(--brand); cursor: pointer; }
+        .role-item { padding: 14px 16px; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; }
+        .role-item:hover { background: var(--surface2); }
+        .role-item.active { background: var(--brand-bg); border-left: 3px solid var(--brand); }
+        .cat-tag { display: inline-flex; background: var(--surface2); border: 1px solid var(--border); padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; color: var(--txt-2); margin: 2px; }
+        .video-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; display: flex; flex-direction: column; }
+        .video-player-container { width: 100%; aspect-ratio: 16/9; background: #000; position: relative; }
+        .video-player-container iframe { width: 100%; height: 100%; border: none; }
+        .video-details { padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+        .loading-row td { text-align: center; color: var(--txt-4); padding: 32px; font-size: 13px; }
+        .empty-state { text-align: center; padding: 48px 24px; color: var(--txt-3); }
+        .empty-state svg { width: 40px; height: 40px; margin-bottom: 12px; opacity: 0.3; }
+
+        @media (max-width: 992px) {
+            .auth-wrapper { flex-direction: column; }
+            .auth-left { padding: 40px 20px; flex: none; text-align: center; }
+            .auth-box { padding: 30px 20px; border: none; box-shadow: none; }
+            .sidebar { position: fixed; top: 0; right: -320px; left: auto; width: 280px; bottom: 0; transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 200; box-shadow: -5px 0 25px rgba(0,0,0,0.1); }
+            .sidebar.open { right: 0; }
+            .sb-close { display: flex; }
+            .main { margin-left: 0; width: 100%; padding-bottom: 70px; }
+            .bottom-nav { display: flex; position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid var(--border); z-index: 100; justify-content: space-around; padding-bottom: var(--safe-bottom); }
+            .bn-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 10px 0; font-size: 10px; color: var(--txt-4); gap: 4px; cursor: pointer; }
+            .bn-item.active { color: var(--brand); }
+            .tb-left { display: flex; align-items: center; }
+            .mobile-logo { display: flex; width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--brand), var(--brand-dk)); align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 12px; color: #fff; margin-right: 12px; flex-shrink: 0; }
+            .mobile-menu-btn { display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; background: var(--surface2); border-radius: var(--r-pill); border: 1px solid var(--border); cursor: pointer; }
+            .mobile-menu-btn-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--brand); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 10px; }
+            #rbac-grid { grid-template-columns: 1fr !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== AUTH FLOW ==================== -->
+<div id="view-auth">
+    <div id="auth-login" class="auth-wrapper">
+        <div class="auth-left">
+            <h1 style="font-family:'Sora';font-size:clamp(32px,5vw,44px);margin-bottom:16px;">Regnum Admin</h1>
+            <p style="font-size:16px;color:rgba(255,255,255,0.8);line-height:1.6;">Master control portal for managing partners, roles, plans, and platform content.</p>
+        </div>
+        <div class="auth-right">
+            <div class="auth-box">
+                <div style="font-family:'Sora';font-size:24px;font-weight:700;margin-bottom:6px;">Admin Login</div>
+                <div style="color:var(--txt-3);font-size:13px;margin-bottom:24px;">Secure access for authorized personnel only.</div>
+                <form id="form-login">
+                    <div class="form-group"><label>Admin Email</label><input type="text" id="login-id" class="form-control" placeholder="admin@regnum.com" required></div>
+                    <div class="form-group"><label>Password</label><input type="password" id="login-pass" class="form-control" placeholder="••••••••" required></div>
+                    <div id="login-error" style="color:var(--red);font-size:12px;margin-bottom:12px;display:none;"></div>
+                    <button type="submit" id="login-btn" class="btn-cta" style="width:100%;padding:14px;">Login to Dashboard</button>
+                    <div style="text-align:center;margin-top:14px;"><span onclick="showAdminForgotPassword()" style="font-size:13px;color:var(--brand);cursor:pointer;font-weight:600;">Forgot Password?</span></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="auth-otp" class="auth-wrapper hidden">
+        <div class="auth-right" style="flex:none;width:100%;">
+            <div class="auth-box" style="margin:0 auto;text-align:center;">
+                <div style="font-family:'Sora';font-size:24px;font-weight:700;">Admin 2FA</div>
+                <div id="otp-hint" style="color:var(--txt-3);margin-bottom:24px;font-size:13px;">Enter the 4-digit code sent to your device.</div>
+                <form id="form-otp">
+                    <div class="otp-inputs" id="otp-container">
+                        <input type="text" maxlength="1" inputmode="numeric" required>
+                        <input type="text" maxlength="1" inputmode="numeric" required>
+                        <input type="text" maxlength="1" inputmode="numeric" required>
+                        <input type="text" maxlength="1" inputmode="numeric" required>
+                    </div>
+                    <div id="otp-error" style="color:var(--red);font-size:12px;margin-bottom:12px;display:none;"></div>
+                    <button type="submit" id="otp-btn" class="btn-cta" style="width:100%;padding:14px;">Verify Securely</button>
+                </form>
+                <div style="text-align:center;margin-top:16px;">
+                    <div id="admin-otp-timer" style="font-size:13px;color:var(--txt-3);margin-bottom:8px;">OTP valid for <strong id="admin-otp-countdown">10:00</strong></div>
+                    <button id="admin-resend-btn" onclick="adminResendOtp()" disabled style="background:none;border:none;color:var(--brand);font-size:13px;font-weight:600;cursor:pointer;opacity:0.4;">Resend OTP (<span id="admin-resend-timer">60</span>s)</button>
+                </div>
+                <div style="text-align:center;margin-top:12px;font-size:13px;cursor:pointer;color:var(--txt-3);" onclick="switchAuthScreen('auth-login')">Cancel</div>
+            </div>
+        </div>
+    </div>
+    <!-- Admin Forgot Password -->
+    <div id="auth-admin-forgot" class="auth-wrapper hidden">
+        <div class="auth-right" style="flex:none;width:100%;">
+            <div class="auth-box" style="margin:0 auto;max-width:400px;">
+                <div style="font-family:'Sora';font-size:22px;font-weight:700;margin-bottom:6px;">Reset Password</div>
+                <div style="color:var(--txt-3);font-size:13px;margin-bottom:20px;">Enter your admin email to receive a password reset link.</div>
+                <div class="form-group"><label>Admin Email</label><input type="email" id="admin-forgot-email" class="form-control" placeholder="admin@regnum.com"></div>
+                <div id="admin-forgot-msg" style="font-size:13px;margin-bottom:12px;display:none;"></div>
+                <button class="btn-cta" style="width:100%;padding:13px;" onclick="sendAdminForgot()">Send Reset Link</button>
+                <div style="text-align:center;margin-top:16px;font-size:13px;cursor:pointer;color:var(--txt-3);" onclick="switchAuthScreen('auth-login')">← Back to Login</div>
+            </div>
+        </div>
+    </div>
+    <!-- Admin Reset Password -->
+    <div id="auth-admin-reset" class="auth-wrapper hidden">
+        <div class="auth-right" style="flex:none;width:100%;">
+            <div class="auth-box" style="margin:0 auto;max-width:400px;">
+                <div style="font-family:'Sora';font-size:22px;font-weight:700;margin-bottom:6px;">New Password</div>
+                <div style="color:var(--txt-3);font-size:13px;margin-bottom:20px;">Enter your new password below.</div>
+                <div class="form-group"><label>New Password</label><input type="password" id="admin-new-pass-reset" class="form-control" placeholder="Min 6 characters"></div>
+                <div class="form-group"><label>Confirm Password</label><input type="password" id="admin-conf-pass-reset" class="form-control" placeholder="Re-enter password"></div>
+                <div id="admin-reset-msg" style="font-size:13px;margin-bottom:12px;display:none;"></div>
+                <button class="btn-cta" style="width:100%;padding:13px;" onclick="submitAdminReset()">Reset Password</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== ADMIN LAYOUT ==================== -->
+<div id="view-admin" class="app-layout hidden">
+    <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+    <aside class="sidebar">
+        <div class="sb-logo">
+            <div class="sb-logomark">RD</div>
+            <div class="sb-name">Regnum Admin</div>
+            <div class="sb-close" onclick="toggleMobileMenu()"><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+        </div>
+        <nav class="sb-nav">
+            <div class="sb-sec">Core Masters</div>
+            <div class="nav-item active" data-target="admin-users" onclick="switchTab('admin-users','Partner Master')"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Partner Master</div>
+            <div class="nav-item" data-target="admin-plans" onclick="switchTab('admin-plans','Plan & Pricing Master')"><svg viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg> Plan Master</div>
+            <div class="nav-item" data-target="admin-promos" onclick="switchTab('admin-promos','Promo Code Master')"><svg viewBox="0 0 24 24"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72Z"/><path d="m14 7 3 3"/></svg> Promo Codes</div>
+            <div class="nav-item" data-target="admin-events" onclick="switchTab('admin-events','Event Master')"><svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="10" y1="14" x2="14" y2="14"/><line x1="12" y1="12" x2="12" y2="16"/></svg> Event Master</div>
+            <div class="sb-sec">Content Engine</div>
+            <div class="nav-item" data-target="admin-categories" onclick="switchTab('admin-categories','Category Master')"><svg viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg> Category Master</div>
+            <div class="nav-item" data-target="admin-amc" onclick="switchTab('admin-amc','AMC Master')"><svg viewBox="0 0 24 24"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg> AMC Master</div>
+            <div class="nav-item" data-target="admin-autosync" onclick="switchTab('admin-autosync','YouTube Auto-Sync Engine')"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21v-5h5"/></svg> YouTube Auto-Sync</div>
+            <div class="nav-item" data-target="admin-upload" onclick="switchTab('admin-upload','Upload Content')"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload Content</div>
+            <div class="sb-sec">Administrator Tools</div>
+            <div class="nav-item" data-target="admin-approvals" onclick="switchTab('admin-approvals','Partner Approval Requests')"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg> Approvals <span id="pending-badge" style="background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:99px;margin-left:4px;display:none;">0</span></div>
+            <div class="nav-item" data-target="admin-email-config" onclick="switchTab('admin-email-config','Email Configuration')"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Email Config</div>
+            <div class="nav-item" data-target="admin-push-notifications" onclick="switchTab('admin-push-notifications','Push Notifications (FCM)')"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Push Notifications</div>
+            <div class="nav-item" data-target="admin-backoffice" onclick="switchTab('admin-backoffice','Back Office Users')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/><path d="M19 11l2 2-4 4"/></svg> Back Office Users</div>
+            <div class="nav-item" data-target="admin-roles" onclick="switchTab('admin-roles','Role & Access Permissions')"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Access Permissions</div>
+            <div class="nav-item" data-target="admin-change-password" onclick="switchTab('admin-change-password','Change Password')"><svg viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Change Password</div>
+            <div class="sb-sec">Learning Portal</div>
+            <div class="nav-item" data-target="admin-lms" onclick="switchTab('admin-lms','LMS Course Builder')"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> LMS Course Builder</div>
+        </nav>
+        <div class="sb-bottom"><div class="sb-out" onclick="logout()"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Logout Admin</div></div>
+    </aside>
+
+    <nav class="bottom-nav">
+        <div class="bn-item active" onclick="switchTab('admin-users','Partners')"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg> Partners</div>
+        <div class="bn-item" onclick="switchTab('admin-autosync','Auto-Sync')"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21v-5h5"/></svg> Auto-Sync</div>
+        <div class="bn-item" onclick="switchTab('admin-events','Events')"><svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/></svg> Events</div>
+        <div class="bn-item" onclick="toggleMobileMenu()"><svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg> Menu</div>
+    </nav>
+
+    <main class="main">
+        <div class="topbar">
+            <div class="tb-left"><div class="mobile-logo">RD</div><div class="tb-title" id="admin-tb-title">Partner Master</div></div>
+            <div style="display:flex;gap:16px;align-items:center;">
+                <span id="topbar-admin-name" style="font-size:13px;color:var(--txt-3);font-weight:600;"></span>
+                <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <div class="mobile-menu-btn-avatar" style="background:var(--purple);" id="admin-avatar">AD</div>
+                    <svg viewBox="0 0 24 24" style="width:18px;height:18px;color:var(--txt-1);"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+
+            <!-- ===== PARTNER MASTER ===== -->
+            <div id="admin-users" class="tab-content-admin">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+                    <div>
+                        <h2 style="font-family:'Sora';font-size:20px;color:var(--txt-1);">Partner Management</h2>
+                        <p style="color:var(--txt-3);font-size:13px;margin-top:4px;">Manage existing partners or manually onboard new ones.</p>
+                    </div>
+                    <button class="btn-cta" onclick="togglePartnerForm()">+ Onboard Partner</button>
+                </div>
+
+                <div id="onboard-partner-card" class="card hidden">
+                    <div class="card-title">Onboard New Partner</div>
+                    <p style="color:var(--txt-3);margin-bottom:20px;">Directly create a partner account. They will receive login credentials.</p>
+                    <div class="grid-form" style="margin-bottom:16px;">
+                        <div class="form-group"><label>Full Name</label><input type="text" id="p-name" class="form-control" placeholder="e.g. Rahul Sharma"></div>
+                        <div class="form-group"><label>Email Address</label><input type="email" id="p-email" class="form-control" placeholder="rahul@example.com"></div>
+                        <div class="form-group"><label>Mobile Number</label><input type="text" id="p-mobile" class="form-control" placeholder="10-digit mobile"></div>
+                        <div class="form-group"><label>ARN Number</label><input type="text" id="p-arn" class="form-control" placeholder="ARN-123456"></div>
+                        <div class="form-group"><label>Business / Company Name</label><input type="text" id="p-biz" class="form-control" placeholder="e.g. RS Wealth"></div>
+                        <div class="form-group"><label>Assign Role</label><select id="p-role" class="form-control"><option value="">Loading...</option></select></div>
+                        <div class="form-group"><label>Assign Subscription Plan</label><select id="p-plan" class="form-control"><option value="">Loading...</option></select></div>
+                        <div class="form-group"><label>Initial Login Password</label><input type="text" id="p-pass" class="form-control" placeholder="Leave blank for Regnum@123"></div>
+                    </div>
+                    <div style="display:flex;gap:12px;margin-top:24px;">
+                        <button class="btn-cta" id="create-partner-btn" onclick="createPartner()">Create Partner Account</button>
+                        <button class="btn-outline" onclick="togglePartnerForm()">Cancel</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                        <div class="card-title" style="margin:0;">Partner Database</div>
+                        <input type="text" id="partner-search" class="form-control" placeholder="Search by name or email..." style="max-width:260px;padding:8px 12px;" oninput="filterPartners(this.value)">
+                    </div>
+                    <div style="overflow-x:auto;">
+                        <table>
+                            <thead><tr><th>Name</th><th>Contact</th><th>Role</th><th>Plan</th><th>Status</th><th>Actions</th></tr></thead>
+                            <tbody id="partners-tbody"><tr class="loading-row"><td colspan="6">Loading partners...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PLAN MASTER ===== -->
+            <div id="admin-plans" class="tab-content-admin hidden" style="padding:0;background:transparent;border:none;box-shadow:none;">
+                <div class="card" style="margin-bottom:24px;">
+                    <div class="card-title">Create New Subscription Plan</div>
+                    <p style="color:var(--txt-3);margin-bottom:20px;">Define pricing and attach a Role to automatically grant permissions.</p>
+                    <div class="grid-form" style="margin-bottom:16px;">
+                        <div class="form-group"><label>Plan Name</label><input type="text" id="plan-name" class="form-control" placeholder="e.g. Pro Partner"></div>
+                        <div class="form-group"><label>Monthly Price (₹)</label><input type="number" id="plan-monthly" class="form-control" placeholder="999"></div>
+                        <div class="form-group"><label>Yearly Price (₹)</label><input type="number" id="plan-yearly" class="form-control" placeholder="9999"></div>
+                        <div class="form-group"><label>Linked Role</label><select id="plan-role" class="form-control"><option value="">Loading roles...</option></select></div>
+                    </div>
+                    <button class="btn-cta" onclick="savePlan()">Save Plan</button>
+                </div>
+                <div class="card">
+                    <div class="card-title" style="margin-bottom:16px;">Manage Existing Plans</div>
+                    <div style="overflow-x:auto;">
+                        <table>
+                            <thead><tr><th>Plan Name</th><th>Monthly</th><th>Yearly</th><th>Linked Role</th><th>Status</th><th>Actions</th></tr></thead>
+                            <tbody id="plans-tbody"><tr class="loading-row"><td colspan="6">Loading plans...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PROMO CODES ===== -->
+            <div id="admin-promos" class="tab-content-admin hidden" style="padding:0;background:transparent;border:none;box-shadow:none;">
+                <div class="card" style="margin-bottom:24px;">
+                    <div class="card-title">Create Promo Code</div>
+                    <p style="color:var(--txt-3);margin-bottom:20px;">Generate discount codes for partners during plan checkout.</p>
+                    <div class="grid-form" style="margin-bottom:16px;">
+                        <div class="form-group"><label>Promo Code</label><input type="text" id="promo-code" class="form-control" placeholder="e.g. DIWALI50" style="text-transform:uppercase;"></div>
+                        <div class="form-group"><label>Discount Type</label><select id="promo-type" class="form-control"><option value="percentage">Percentage (%)</option><option value="flat">Flat Amount (₹)</option></select></div>
+                        <div class="form-group"><label>Discount Value</label><input type="number" id="promo-value" class="form-control" placeholder="50"></div>
+                        <div class="form-group"><label>Valid Until (Expiry)</label><input type="date" id="promo-expiry" class="form-control"></div>
+                        <div class="form-group"><label>Max Uses (blank = unlimited)</label><input type="number" id="promo-maxuses" class="form-control" placeholder="100"></div>
+                    </div>
+                    <button class="btn-cta" onclick="createPromo()">Generate Promo Code</button>
+                </div>
+                <div class="card">
+                    <div class="card-title" style="margin-bottom:16px;">Active Promo Codes</div>
+                    <div style="overflow-x:auto;">
+                        <table>
+                            <thead><tr><th>Code</th><th>Discount</th><th>Usage</th><th>Expiry</th><th>Status</th><th>Actions</th></tr></thead>
+                            <tbody id="promos-tbody"><tr class="loading-row"><td colspan="6">Loading promos...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== EVENT MASTER ===== -->
+            <div id="admin-events" class="tab-content-admin hidden" style="padding:0;background:transparent;border:none;box-shadow:none;">
+                <div class="card" style="margin-bottom:24px;">
+                    <div class="card-title">Create New Event</div>
+                    <p style="color:var(--txt-3);margin-bottom:20px;">Schedule upcoming webinars or physical events for your partners.</p>
+                    <div class="grid-form" style="margin-bottom:16px;">
+                        <div class="form-group"><label>Event Type</label><select id="ev-type" class="form-control"><option value="webinar">Webinar (Online)</option><option value="physical">Physical Event (Offline)</option></select></div>
+                        <div class="form-group"><label>Event Title</label><input type="text" id="ev-title" class="form-control" placeholder="e.g. Navigating Midcap Volatility"></div>
+                        <div class="form-group"><label>Date</label><input type="date" id="ev-date" class="form-control"></div>
+                        <div class="form-group"><label>Time</label><input type="time" id="ev-time" class="form-control"></div>
+                        <div class="form-group"><label>Speaker / AMC Name</label><input type="text" id="ev-speaker" class="form-control" placeholder="e.g. Rahul Sharma, XYZ AMC"></div>
+                        <div class="form-group"><label>Location / Meeting Link</label><input type="text" id="ev-loc" class="form-control" placeholder="Zoom link or Hotel Address"></div>
+                    </div>
+                    <button class="btn-cta" onclick="handleCreateEvent()">Create Event</button>
+        
+                </div>
+                <div class="card">
+                    <div class="card-title" style="margin-bottom:16px;">Upcoming Events</div>
+                    <div style="overflow-x:auto;">
+                        <table>
+                            <thead><tr><th>Event Title</th><th>Type</th><th>Date & Time</th><th>Speaker</th><th>Status</th><th>Actions</th></tr></thead>
+                            <tbody id="events-tbody"><tr class="loading-row"><td colspan="6">Loading events...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== CATEGORY MASTER ===== -->
+            <div id="admin-categories" class="tab-content-admin hidden" style="padding:0;background:transparent;border:none;box-shadow:none;">
+                <div class="card" style="margin-bottom:24px;">
+                    <div class="card-title">Content Category Master</div>
+                    <p style="color:var(--txt-3);margin-bottom:20px;">Define the folder structure for your marketing content.</p>
+                    <div class="grid-form" style="margin-bottom:16px;">
+                        <div class="form-group"><label>Parent Category (select for sub-category)</label><select id="cat-parent" class="form-control"><option value="">-- New Parent Category --</option></select></div>
+                        <div class="form-group"><label>Category / Sub-category Name</label><input type="text" id="cat-name" class="form-control" placeholder="e.g. SIP"></div>
+                    </div>
+                    <button class="btn-cta" onclick="saveCategory()">Save Category</button>
+                </div>
+                <div class="card">
+                    <div class="card-title" style="margin-bottom:16px;">Category Tree</div>
+                    <div style="overflow-x:auto;">
+                        <table>
+                            <thead><tr><th>Parent Category</th><th>Sub-Categories</th><th>Actions</th></tr></thead>
+                            <tbody id="categories-tbody"><tr class="loading-row"><td colspan="3">Loading categories...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== AMC MASTER ===== -->
+            <div id="admin-amc" class="tab-content-admin hidden" style="padding:0;background:transparent;border:none;box-shadow:none;">
+                <div class="card" style="margin-bottom:24px;">
+                    <div class="card-title">AMC Profile & Automation Master</div>
+                    <p style="color:var(--txt-3);margin-bottom:20px;">Manage AMCs and configure automated YouTube fetching.</p>
+                    <div class="grid-form" style="margin-bottom:16px;">
+                        <div class="form-group"><label>AMC Name</label><input type="text" id="amc-name" class="form-control" placeholder="e.g. SBI Mutual Fund"></div>
+                        <div class="form-group"><label>Instagram Profile URL</label><input type="url" id="amc-insta" class="form-control" placeholder="https://instagram.com/..."></div>
+                        <div class="form-group" style="grid-column:1/-1;padding-top:16px;border-top:1px solid var(--border);">
+                            <label style="color:var(--brand);font-weight:700;">YouTube Automation Settings</label>
+                        </div>
+                        <div class="form-group"><label>Auto-Fetch YouTube Videos?</label>
+                            <select id="amc-autosync" class="form-control">
+                                <option value="true">Enabled (Fetch & Publish Automatically)</option>
+                                <option value="false">Disabled</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>YouTube Channel ID</label><input type="text" id="amc-ytid" class="form-control" placeholder="e.g. UC_x5XG1OV2P6uZZ5FSM9Ttw"><div style="font-size:11px;color:var(--txt-4);margin-top:4px;">Required to fetch RSS XML Feed/API.</div></div>
+                    </div>
+                    <button class="btn-cta" onclick="saveAmc()">Save AMC Profile</button>
+                </div>
+                <div class="card">
+                    <div class="card-title" style="margin-bottom:16px;">Registered AMCs</div>
+                    <div style="overflow-x:auto;">
+                        <table>
+                            <thead><tr><th>AMC Name</th><th>Auto-Sync</th><th>Channel ID</th><th>Actions</th></tr></thead>
+                            <tbody id="amc-tbody"><tr class="loading-row"><td colspan="4">Loading AMCs...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== YOUTUBE AUTO-SYNC ===== -->
+            <div id="admin-autosync" class="tab-content-admin hidden" style="padding:0;background:transparent;border:none;box-shadow:none;">
+                <div class="card" style="margin-bottom:24px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                        <div class="card-title" style="margin:0;">YouTube Auto-Sync Engine</div>
+                        <button class="btn-outline" onclick="loadAutoSyncContent()"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21v-5h5"/></svg> Refresh Feed</button>
+                    </div>
+                    <p style="color:var(--txt-3);margin-bottom:24px;">Auto-fetched videos from configured AMC YouTube channels, published to the Partner Portal.</p>
+                    <div style="display:flex;gap:16px;margin-bottom:24px;">
+                        <div style="flex:1;background:var(--surface2);padding:16px;border:1px solid var(--border);border-radius:8px;">
+                            <div style="font-size:12px;color:var(--txt-3);font-weight:600;text-transform:uppercase;">Channels Monitored</div>
+                            <div id="sync-channel-count" style="font-size:24px;font-weight:700;font-family:'Sora';color:var(--txt-1);">—</div>
+                        </div>
+                        <div style="flex:1;background:var(--brand-bg);padding:16px;border:1px solid var(--brand-bd);border-radius:8px;">
+                            <div style="font-size:12px;color:var(--brand-dk);font-weight:600;text-transform:uppercase;">Auto-Synced Videos (Total)</div>
+                            <div id="sync-video-count" style="font-size:24px;font-weight:700;font-family:'Sora';color:var(--brand-dk);">—</div>
+                        </div>
+                    </div>
+                    <div class="card-title" style="margin-bottom:16px;font-size:14px;">Recent Auto-Fetched Videos</div>
+                    <div class="grid-3" id="autosync-videos-grid">
+                        <div style="text-align:center;color:var(--txt-4);padding:32px;grid-column:1/-1;">Loading videos...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== UPLOAD CONTENT ===== -->
+            <div id="admin-upload" class="tab-content-admin hidden" style="padding:0;background:transparent;border:none;box-shadow:none;">
+                <div class="card">
+                    <div class="card-title">Manual Upload / Embed Content</div>
+                    <p style="color:var(--txt-3);margin-bottom:24px;">Manually publish marketing material to the Partner Portal.</p>
+                    <div class="grid-form" style="margin-bottom:16px;">
+                        <div class="form-group" style="grid-column:1/-1;"><label>Asset Title</label><input type="text" id="up-title" class="form-control" placeholder="e.g. Benefits of SIP for Long Term"></div>
+                        <div class="form-group"><label>Asset Type</label><select id="upload-type" class="form-control" onchange="toggleUploadType()"><option value="file">File (Image / Video / PDF)</option><option value="embed">Embed (YouTube / Instagram)</option></select></div>
+                        <div class="form-group"><label>Parent Category</label><select id="upload-parent" class="form-control" onchange="loadSubCategories(this.value)"><option value="">-- Select --</option></select></div>
+                        <div class="form-group"><label>Sub-Category</label><select id="upload-sub" class="form-control" disabled><option value="">-- Select Parent First --</option></select></div>
+                        <div class="form-group"><label>Linked AMC (Optional)</label><select id="upload-amc" class="form-control"><option value="">General / No Specific AMC</option></select></div>
+                    </div>
+                    <div id="upload-file-area" style="border:2px dashed var(--border);border-radius:8px;padding:40px;text-align:center;background:var(--surface2);margin-bottom:24px;cursor:pointer;" onclick="document.getElementById('file-input').click()">
+                        <div style="font-weight:600;color:var(--txt-2);">Click to upload or drag and drop</div>
+                        <div id="file-name-display" style="font-size:12px;color:var(--txt-4);margin-top:8px;">No file selected</div>
+                        <input type="file" id="file-input" style="display:none;" onchange="document.getElementById('file-name-display').textContent=this.files[0]?.name||'No file selected'">
+                    </div>
+                    <div id="upload-embed-area" class="hidden" style="margin-bottom:24px;">
+                        <div class="form-group" style="margin-bottom:0;"><label>Embed Link / Iframe Code</label><textarea id="embed-url" class="form-control" rows="3" placeholder="Paste YouTube URL or Instagram Embed Code here..."></textarea></div>
+                    </div>
+                    <div style="text-align:right;"><button class="btn-cta" onclick="publishContent()">Publish Asset to Portal</button></div>
+                </div>
+                <div class="card">
+                    <div class="card-title" style="margin-bottom:16px;">Published Content</div>
+                    <div style="overflow-x:auto;">
+                        <table>
+                            <thead><tr><th>Title</th><th>Type</th><th>Category</th><th>AMC</th><th>Date</th><th>Actions</th></tr></thead>
+                            <tbody id="content-tbody"><tr class="loading-row"><td colspan="6">Loading content...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PUSH NOTIFICATIONS ===== -->
+            <div id="admin-push-notifications" class="tab-content-admin hidden" style="padding:0;background:transparent;border:none;box-shadow:none;">
+                <!-- FCM Config Card -->
+                <div class="card" style="margin-bottom:20px;">
+                    <div class="card-title">Firebase Cloud Messaging (FCM) Configuration</div>
+                    <p style="color:var(--txt-3);margin-bottom:20px;">Configure Firebase credentials to enable Push Notifications on PWA &amp; Mobile. Get these from your <strong>Firebase Console → Project Settings → Cloud Messaging</strong>.</p>
+                    <div class="grid-form">
+                        <div class="form-group"><label>Firebase Project ID</label><input type="text" id="fcm-project-id" class="form-control" placeholder="your-project-id"></div>
+                        <div class="form-group"><label>FCM Server Key (Cloud Messaging tab)</label><input type="text" id="fcm-server-key" class="form-control" placeholder="AAAAxxxxx:APA91b..."></div>
+                        <div class="form-group"><label>VAPID Public Key (Web Push certificates)</label><input type="text" id="fcm-vapid-key" class="form-control" placeholder="BNxxxxxx...xxCC="></div>
+                        <div class="form-group"><label>Firebase API Key</label><input type="text" id="fcm-api-key" class="form-control" placeholder="AIzaSyxxxxxxxxxxxxxxxxxxxxxx"></div>
+                        <div class="form-group"><label>Auth Domain</label><input type="text" id="fcm-auth-domain" class="form-control" placeholder="your-app.firebaseapp.com"></div>
+                        <div class="form-group"><label>App ID</label><input type="text" id="fcm-app-id" class="form-control" placeholder="1:xxxx:web:xxxx"></div>
+                    </div>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;">
+                        <button class="btn-cta" onclick="saveFcmConfig()">
+                            <svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                            Save FCM Config
+                        </button>
+                        <button class="btn-outline" onclick="testFcmConfig()">
+                            <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                            Test &amp; Verify Connection
+                        </button>
+                    </div>
+                    <div id="fcm-config-status" style="margin-top:14px;display:none;padding:12px 16px;border-radius:8px;font-size:13px;font-weight:600;"></div>
+                </div>
+
+                <!-- Stats Row -->
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-bottom:20px;">
+                    <div class="card" style="padding:20px;text-align:center;">
+                        <div style="font-size:30px;font-weight:800;font-family:'Sora';color:var(--brand);" id="pn-total-subs">—</div>
+                        <div style="font-size:12px;color:var(--txt-3);margin-top:4px;">Total Subscribers</div>
+                    </div>
+                    <div class="card" style="padding:20px;text-align:center;">
+                        <div style="font-size:30px;font-weight:800;font-family:'Sora';color:var(--blue);" id="pn-partner-subs">—</div>
+                        <div style="font-size:12px;color:var(--txt-3);margin-top:4px;">Partner Devices</div>
+                    </div>
+                    <div class="card" style="padding:20px;text-align:center;">
+                        <div style="font-size:30px;font-weight:800;font-family:'Sora';color:var(--purple);" id="pn-sent-today">—</div>
+                        <div style="font-size:12px;color:var(--txt-3);margin-top:4px;">Sent Today</div>
+                    </div>
+                    <div class="card" style="padding:20px;text-align:center;">
+                        <div style="font-size:30px;font-weight:800;font-family:'Sora';color:var(--amber);" id="pn-open-rate">—%</div>
+                        <div style="font-size:12px;color:var(--txt-3);margin-top:4px;">Open Rate</div>
+                    </div>
+                </div>
+
+                <!-- Compose -->
+                <div class="card" style="margin-bottom:20px;">
+                    <div class="card-title">Compose &amp; Send Push Notification</div>
+                    <div class="grid-form" style="margin-bottom:16px;">
+                        <div class="form-group">
+                            <label>Send To</label>
+                            <select id="pn-audience" class="form-control" onchange="togglePnAudienceSelects()">
+                                <option value="all">All Partners</option>
+                                <option value="specific">Specific Partner</option>
+                                <option value="role">By Role / Plan</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="pn-specific-wrap" style="display:none;">
+                            <label>Select Partner</label>
+                            <select id="pn-specific-partner" class="form-control"><option value="">— select —</option></select>
+                        </div>
+                        <div class="form-group" id="pn-role-wrap" style="display:none;">
+                            <label>Select Role</label>
+                            <select id="pn-role-select" class="form-control"><option value="">— select role —</option></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Notification Title <span style="color:var(--txt-4);font-weight:400;">(max 65 chars)</span></label>
+                        <input type="text" id="pn-title" class="form-control" placeholder="e.g. 📢 New Market Content Available!" maxlength="65" oninput="updatePnCharCount()">
+                    </div>
+                    <div class="form-group">
+                        <label>Notification Body <span style="color:var(--txt-4);font-weight:400;">(<span id="pn-char-count">0</span>/240)</span></label>
+                        <textarea id="pn-body" class="form-control" rows="3" placeholder="Write the notification message here..." maxlength="240" oninput="updatePnCharCount()"></textarea>
+                    </div>
+                    <div class="grid-2-col">
+                        <div class="form-group"><label>Click URL <span style="font-weight:400;color:var(--txt-4);">(optional)</span></label><input type="url" id="pn-url" class="form-control" placeholder="https://..."></div>
+                        <div class="form-group"><label>Icon URL <span style="font-weight:400;color:var(--txt-4);">(optional)</span></label><input type="url" id="pn-icon" class="form-control" placeholder="https://..."></div>
+                    </div>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+                        <button class="btn-cta" onclick="sendPushNotification()" id="pn-send-btn">
+                            <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                            Send Now
+                        </button>
+                        <button class="btn-outline" onclick="sendTestPushNotification()">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                            Send Test to My Device
+                        </button>
+                    </div>
+                </div>
+
+                <!-- History Table -->
+                <div class="card" style="padding:0;overflow:hidden;">
+                    <div style="padding:16px 20px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+                        <div style="font-weight:700;">Notification History</div>
+                        <button class="btn-outline" style="padding:6px 14px;font-size:12px;" onclick="loadPushHistory()">↻ Refresh</button>
+                    </div>
+                    <div style="overflow-x:auto;">
+                        <table>
+                            <thead><tr><th>Title</th><th>Body</th><th>Audience</th><th>Sent</th><th>Opened</th><th>Date</th></tr></thead>
+                            <tbody id="push-history-tbody">
+                                <tr><td colspan="6" style="text-align:center;color:var(--txt-4);padding:32px;">No notifications sent yet.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== BACK OFFICE USERS ===== -->
+            <div id="admin-backoffice" class="tab-content-admin hidden" style="padding:0;background:transparent;border:none;box-shadow:none;">
+                <style>
+                    .bo-perm-chip { display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-size:12px;font-weight:500;cursor:pointer;user-select:none;background:var(--surface2);color:var(--txt-2);transition:.15s; }
+                    .bo-perm-chip input[type=checkbox]{ accent-color:var(--brand); width:14px;height:14px;cursor:pointer; }
+                    .bo-perm-chip:has(input:checked){ background:var(--brand-bg);border-color:var(--brand-bd);color:var(--brand); }
+                </style>
+                <div style="display:grid;grid-template-columns:1fr 400px;gap:24px;align-items:start;">
+                    <div class="card" style="padding:0;overflow:hidden;">
+                        <div style="padding:16px 20px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+                            <div style="font-weight:700;">Back Office Users</div>
+                            <div style="display:flex;gap:8px;">
+                                <input type="text" id="bo-search" class="form-control" style="width:180px;padding:8px 12px;" placeholder="Search..." oninput="filterBoUsers()">
+                                <button class="btn-cta" style="padding:8px 14px;" onclick="showBoForm()">+ Add User</button>
+                            </div>
+                        </div>
+                        <div style="overflow-x:auto;">
+                            <table>
+                                <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Access Modules</th><th>Status</th><th>Actions</th></tr></thead>
+                                <tbody id="bo-users-tbody">
+                                    <tr><td colspan="6" style="text-align:center;color:var(--txt-4);padding:32px;">No back office users found.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card" id="bo-form-card" style="display:none;position:sticky;top:80px;">
+                        <div class="card-title" id="bo-form-title">Add Back Office User</div>
+                        <input type="hidden" id="bo-edit-id">
+                        <div class="form-group"><label>Full Name</label><input type="text" id="bo-name" class="form-control" placeholder="Full Name"></div>
+                        <div class="form-group"><label>Email</label><input type="email" id="bo-email" class="form-control" placeholder="user@regnum.com"></div>
+                        <div class="form-group"><label>Mobile</label><input type="text" id="bo-mobile" class="form-control" placeholder="9XXXXXXXXX"></div>
+                        <div class="form-group" id="bo-pass-group"><label id="bo-pass-label">Password</label><input type="password" id="bo-password" class="form-control" placeholder="Min 8 characters"></div>
+                        <div class="form-group">
+                            <label>Predefined Role Template</label>
+                            <select id="bo-role" class="form-control" onchange="applyBoRoleTemplate()">
+                                <option value="">— Choose a preset —</option>
+                                <option value="operations">Operations Manager</option>
+                                <option value="content_manager">Content Manager</option>
+                                <option value="support">Support Executive</option>
+                                <option value="custom">Custom (select below)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label style="margin-bottom:10px;display:block;">Module Access</label>
+                            <div id="bo-perms-grid" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+                        </div>
+                        <div style="display:flex;gap:10px;margin-top:16px;">
+                            <button class="btn-cta" style="flex:1;" onclick="saveBoUser()">
+                                <svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
+                                Save User
+                            </button>
+                            <button class="btn-outline" onclick="hideBoForm()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ===== RBAC ===== -->
+            <div id="admin-roles" class="tab-content-admin hidden" style="padding:0;background:transparent;border:none;box-shadow:none;">
+                <div class="card" style="margin-bottom:24px;">
+                    <div class="card-title">Role-Based Access Control</div>
+                    <p style="color:var(--txt-3);">Create roles and granularly define which features partners can access.</p>
+                </div>
+                <div id="rbac-grid" style="display:grid;grid-template-columns:280px 1fr;gap:24px;">
+                    <div class="card" style="padding:0;overflow:hidden;height:fit-content;">
+                        <div style="padding:16px 20px;background:var(--surface2);border-bottom:1px solid var(--border);font-weight:700;color:var(--txt-1);">Manage Roles</div>
+                        <div id="roles-list"></div>
+                        <div style="padding:16px;"><button class="btn-outline" style="width:100%;" onclick="createNewRole()">+ Create New Role</button></div>
+                    </div>
+                    <div class="card" style="padding:0;overflow:hidden;">
+                        <div style="padding:20px;border-bottom:1px solid var(--border);">
+                            <div class="grid-2-col" style="align-items:end;">
+                                <div class="form-group" style="margin-bottom:0;"><label>Editing Role Name</label><input type="text" id="role-name-input" class="form-control" placeholder="Enter role name..."></div>
+                                <div style="text-align:right;"><button id="save-role-btn" class="btn-cta" onclick="saveRole()">Save Permissions</button></div>
+                            </div>
+                        </div>
+                        <div style="overflow-x:auto;">
+                            <table>
+                                <thead><tr><th>Feature Area</th><th style="text-align:center;">View</th><th style="text-align:center;">Add / Edit</th><th style="text-align:center;">Delete</th><th style="text-align:center;">Export</th></tr></thead>
+                                <tbody id="permissions-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== LMS ===== -->
+            <div id="admin-lms" class="tab-content-admin hidden" style="padding:0;background:transparent;border:none;box-shadow:none;">
+                <div class="card">
+                    <div class="card-title">LMS Course Builder</div>
+                    <p style="margin-bottom:16px;color:var(--txt-3);">Build courses and modules for your partner academy.</p>
+                    <div id="lms-courses-list" style="max-width:700px;"></div>
+                </div>
+            </div>
+
+
+            <!-- ===== PARTNER APPROVALS ===== -->
+            <div id="admin-approvals" class="tab-content-admin hidden" style="padding:0;background:transparent;border:none;box-shadow:none;">
+                <div class="card" style="margin-bottom:20px;">
+                    <div class="card-title">Partner Approval Requests</div>
+                    <p style="color:var(--txt-3);">Review new partner registrations and approve or reject them.</p>
+                </div>
+                <div class="card" style="padding:0;overflow:hidden;">
+                    <div style="overflow-x:auto;">
+                        <table>
+                            <thead><tr><th>Name</th><th>Email</th><th>Mobile</th><th>ARN</th><th>Business</th><th>Registered</th><th>Action</th></tr></thead>
+                            <tbody id="approvals-tbody"><tr><td colspan="7" style="text-align:center;padding:32px;color:var(--txt-4)">Loading...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== EMAIL CONFIG ===== -->
+            <div id="admin-email-config" class="tab-content-admin hidden" style="padding:0;background:transparent;border:none;box-shadow:none;">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;">
+                    <!-- SMTP Settings -->
+                    <div class="card">
+                        <div class="card-title" style="margin-bottom:4px;">SMTP / AWS SES Configuration</div>
+                        <p style="color:var(--txt-3);font-size:13px;margin-bottom:16px;">Configure your outgoing mail server. Supports Gmail, Outlook, AWS SES, or any custom SMTP.</p>
+
+                        <!-- Provider Quick-Select -->
+                        <div class="form-group" style="margin-bottom:16px;">
+                            <label style="font-weight:700;">Provider Preset</label>
+                            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">
+                                <button class="btn-outline" style="padding:5px 12px;font-size:12px;" onclick="applySmtpPreset('ses_us_east')">AWS SES (us-east-1)</button>
+                                <button class="btn-outline" style="padding:5px 12px;font-size:12px;" onclick="applySmtpPreset('ses_ap_south')">AWS SES (ap-south-1)</button>
+                                <button class="btn-outline" style="padding:5px 12px;font-size:12px;" onclick="applySmtpPreset('gmail')">Gmail</button>
+                                <button class="btn-outline" style="padding:5px 12px;font-size:12px;" onclick="applySmtpPreset('outlook')">Outlook</button>
+                            </div>
+                            <div id="ses-hint" style="display:none;margin-top:8px;padding:10px 12px;background:var(--brand-bg);border-radius:8px;font-size:12px;color:var(--brand);line-height:1.6;">
+                                <strong>AWS SES SMTP Credentials:</strong><br>
+                                Username = your <strong>SMTP IAM Access Key ID</strong> (not the AWS console key)<br>
+                                Password = your <strong>SMTP IAM Secret</strong> (generated in SES → SMTP Settings)<br>
+                                ⚠️ These are different from your regular AWS IAM credentials.<br>
+                                Generate them at: <em>AWS SES Console → SMTP Settings → Create SMTP Credentials</em>
+                            </div>
+                        </div>
+
+                        <div class="form-group"><label>SMTP Host</label><input type="text" id="cfg-smtp-host" class="form-control" placeholder="email-smtp.us-east-1.amazonaws.com"></div>
+                        <div class="form-group"><label>SMTP Port</label><input type="number" id="cfg-smtp-port" class="form-control" placeholder="587" value="587"></div>
+                        <div class="form-group"><label>SMTP Username</label><input type="text" id="cfg-smtp-user" class="form-control" placeholder="For SES: SMTP Access Key ID (starts with AKIA...)"></div>
+                        <div class="form-group"><label>SMTP Password</label><input type="password" id="cfg-smtp-pass" class="form-control" placeholder="For SES: SMTP Secret (generated in SES console, NOT IAM secret)"></div>
+                        <div class="form-group"><label>From Name</label><input type="text" id="cfg-from-name" class="form-control" placeholder="Regnum Digital"></div>
+                        <div class="form-group"><label>From Email <span style="font-size:11px;color:var(--txt-3);">(must be verified in SES for AWS)</span></label><input type="email" id="cfg-from-email" class="form-control" placeholder="noreply@yourdomain.com"></div>
+
+                        <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap;">
+                            <button class="btn-cta" onclick="saveEmailConfig()">Save Configuration</button>
+                        </div>
+
+                        <!-- Test Email Section -->
+                        <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+                            <div style="font-size:13px;font-weight:700;color:var(--txt-1);margin-bottom:10px;">📧 Send Test Email</div>
+                            <p style="font-size:12px;color:var(--txt-3);margin-bottom:10px;">Enter any email address to verify your SMTP/SES configuration is working correctly.</p>
+                            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                                <input type="email" id="cfg-test-email" class="form-control" placeholder="test@example.com" style="flex:1;min-width:180px;">
+                                <button class="btn-outline" onclick="testEmailConfig()" style="white-space:nowrap;">Send Test</button>
+                            </div>
+                            <div id="email-test-result" style="margin-top:10px;font-size:13px;"></div>
+                        </div>
+                    </div>
+                    <!-- Email Templates -->
+                    <div class="card">
+                        <div class="card-title" style="margin-bottom:4px;">Email Templates</div>
+                        <p style="color:var(--txt-3);font-size:13px;margin-bottom:20px;">Edit the HTML templates used for automated emails. Use placeholders shown.</p>
+                        <div class="form-group">
+                            <label>Select Template</label>
+                            <select id="tmpl-select" class="form-control" onchange="loadTemplateEditor()">
+                                <option value="otp_login">OTP Login — {{OTP_CODE}}</option>
+                                <option value="partner_welcome">Partner Welcome — {{PARTNER_NAME}}, {{PARTNER_EMAIL}}, {{APP_URL}}</option>
+                                <option value="new_content">New Content — {{PARTNER_NAME}}, {{CONTENT_TITLE}}, {{CONTENT_TYPE}}, {{CONTENT_CATEGORY}}, {{APP_URL}}</option>
+                                <option value="password_reset">Password Reset — {{RESET_URL}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Subject</label><input type="text" id="tmpl-subject" class="form-control"></div>
+                        <div class="form-group"><label>HTML Body</label><textarea id="tmpl-body" class="form-control" rows="10" style="font-family:monospace;font-size:12px;resize:vertical;"></textarea></div>
+                        <button class="btn-cta" onclick="saveTemplate()">Save Template</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== CHANGE PASSWORD ===== -->
+            <div id="admin-change-password" class="tab-content-admin hidden" style="padding:0;background:transparent;border:none;box-shadow:none;">
+                <div class="card" style="max-width:480px;">
+                    <div class="card-title">Change Admin Password</div>
+                    <p style="color:var(--txt-3);margin-bottom:20px;">Update your admin account password.</p>
+                    <div class="form-group"><label>Current Password</label><input type="password" id="adm-cur-pass" class="form-control" placeholder="Enter current password"></div>
+                    <div class="form-group"><label>New Password</label><input type="password" id="adm-new-pass" class="form-control" placeholder="Enter new password"></div>
+                    <div class="form-group"><label>Confirm New Password</label><input type="password" id="adm-conf-pass" class="form-control" placeholder="Confirm new password"></div>
+                    <div id="adm-pass-err" style="color:var(--red);font-size:12px;margin-bottom:12px;display:none;"></div>
+                    <button class="btn-cta" onclick="changeAdminPassword()">Update Password</button>
+                </div>
+            </div>
+
+        </div><!-- /content -->
+    </main>
+</div><!-- /view-admin -->
+
+<script>
+// ============================================================
+// CONFIG
+// ============================================================
+const API_BASE = 'https://saarthi.regnumdigital.co.in/api';
+
+// ============================================================
+// CORE API HELPER
+// ============================================================
+async function api(method, endpoint, body = null, isForm = false) {
+    const headers = {};
+    const token = localStorage.getItem('rd_token');
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+    if (!isForm && body) headers['Content-Type'] = 'application/json';
+    const opts = { method, headers };
+    if (body) opts.body = isForm ? body : JSON.stringify(body);
+    try {
+        const res = await fetch(`${API_BASE}${endpoint}`, opts);
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.message || `Error ${res.status}`);
+        return { ok: true, data };
+    } catch (e) { return { ok: false, error: e.message }; }
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function toast(msg, type = 'success') {
+    const el = Object.assign(document.createElement('div'), {
+        textContent: msg,
+        style: `position:fixed;bottom:24px;right:24px;z-index:9999;padding:12px 20px;
+            border-radius:8px;font-size:13px;font-weight:600;color:#fff;max-width:320px;
+            background:${type==='success'?'#00B386':type==='error'?'#EF4444':'#F59E0B'};
+            box-shadow:0 4px 20px rgba(0,0,0,.15);animation:toastIn .25s ease;`
+    });
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 3500);
+}
+const sty = document.createElement('style');
+sty.textContent = '@keyframes toastIn{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}';
+document.head.appendChild(sty);
+
+// ============================================================
+// AUTH
+// ============================================================
+let _adminEmail = '';
+let _adminOtpInterval = null;
+let _adminResendInterval = null;
+
+function startAdminOtpTimers() {
+    // Clear any existing timers
+    clearInterval(_adminOtpInterval); clearInterval(_adminResendInterval);
+    // 10 min countdown
+    let secs = 600;
+    const countdown = document.getElementById('admin-otp-countdown');
+    _adminOtpInterval = setInterval(() => {
+        secs--;
+        if (secs <= 0) { clearInterval(_adminOtpInterval); if(countdown) countdown.textContent='Expired'; return; }
+        const m = Math.floor(secs/60), s = secs%60;
+        if(countdown) countdown.textContent = `${m}:${s.toString().padStart(2,'0')}`;
+    }, 1000);
+    // 60s resend cooldown
+    let resendSecs = 60;
+    const resendBtn = document.getElementById('admin-resend-btn');
+    const resendTimer = document.getElementById('admin-resend-timer');
+    if(resendBtn) { resendBtn.disabled=true; resendBtn.style.opacity='0.4'; }
+    _adminResendInterval = setInterval(() => {
+        resendSecs--;
+        if(resendTimer) resendTimer.textContent = resendSecs;
+        if(resendSecs <= 0) {
+            clearInterval(_adminResendInterval);
+            if(resendBtn){ resendBtn.disabled=false; resendBtn.style.opacity='1'; resendBtn.textContent='Resend OTP'; }
+        }
+    }, 1000);
+}
+
+async function adminResendOtp() {
+    const btn = document.getElementById('admin-resend-btn');
+    btn.disabled=true;
+    const r = await api('POST', '/admin/auth/resend-otp', { email: _adminEmail });
+    if (r.ok) { toast('New OTP sent!'); startAdminOtpTimers(); document.querySelectorAll('#otp-container input').forEach(i=>i.value=''); }
+    else { toast(r.error,'error'); btn.disabled=false; }
+}
+
+// Admin Forgot Password
+function showAdminForgotPassword() { switchAuthScreen('auth-admin-forgot'); }
+
+async function sendAdminForgot() {
+    const email = document.getElementById('admin-forgot-email').value.trim();
+    const msg   = document.getElementById('admin-forgot-msg');
+    if (!email) return;
+    const r = await api('POST', '/auth/forgot-password', { email });
+    msg.style.display='block';
+    msg.style.color = r.ok ? 'var(--brand)' : 'var(--red)';
+    msg.textContent = r.ok ? r.data.message : r.error;
+}
+
+function checkAdminResetToken() {
+    const params = new URLSearchParams(window.location.search);
+    const token  = params.get('token');
+    const type   = params.get('type');
+    if (token && type === 'admin') {
+        window._resetToken = token;
+        switchAuthScreen('auth-admin-reset');
+    }
+}
+
+async function submitAdminReset() {
+    const np  = document.getElementById('admin-new-pass-reset').value;
+    const cp  = document.getElementById('admin-conf-pass-reset').value;
+    const msg = document.getElementById('admin-reset-msg');
+    msg.style.display='none';
+    if (!np || np !== cp) { msg.textContent='Passwords do not match.'; msg.style.display='block'; msg.style.color='var(--red)'; return; }
+    const r = await api('POST', '/auth/forgot-password/reset', { token: window._resetToken, newPassword: np });
+    msg.style.display='block';
+    if (r.ok) { msg.style.color='var(--brand)'; msg.textContent=r.data.message+' Redirecting...'; setTimeout(()=>switchAuthScreen('auth-login'),2000); }
+    else { msg.style.color='var(--red)'; msg.textContent=r.error; }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    // OTP input auto-advance
+    document.querySelectorAll('#otp-container input').forEach((inp, i, arr) => {
+        inp.addEventListener('input', e => {
+            e.target.value = e.target.value.replace(/\D/g,'');
+            if (e.target.value && i < arr.length - 1) arr[i+1].focus();
+        });
+        inp.addEventListener('keydown', e => {
+            if (e.key==='Backspace' && !e.target.value && i>0) arr[i-1].focus();
+        });
+    });
+
+    checkAdminResetToken();
+    // Check existing token
+    const token = localStorage.getItem('rd_token');
+    const user  = JSON.parse(localStorage.getItem('rd_user') || 'null');
+    if (token && user && user.userType === 'admin') {
+        document.getElementById('view-auth').classList.add('hidden');
+        document.getElementById('view-admin').classList.remove('hidden');
+        setAdminName(user.name);
+        loadAllData();
+    }
+});
+
+document.getElementById('form-login').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const email = document.getElementById('login-id').value.trim();
+    const pass  = document.getElementById('login-pass').value;
+    const btn   = document.getElementById('login-btn');
+    const errEl = document.getElementById('login-error');
+    errEl.style.display = 'none';
+    btn.disabled = true; btn.textContent = 'Sending OTP...';
+    const r = await api('POST', '/admin/auth/login', { email, password: pass });
+    btn.disabled = false; btn.textContent = 'Login to Dashboard';
+    if (r.ok) {
+        _adminEmail = email;
+        document.getElementById('otp-hint').textContent = `OTP sent to ${email}`;
+        switchAuthScreen('auth-otp');
+        startAdminOtpTimers();
+        setTimeout(() => document.querySelector('#otp-container input').focus(), 50);
+    } else {
+        errEl.textContent = r.error;
+        errEl.style.display = 'block';
+    }
+});
+
+document.getElementById('form-otp').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const otp   = [...document.querySelectorAll('#otp-container input')].map(i=>i.value).join('');
+    const btn   = document.getElementById('otp-btn');
+    const errEl = document.getElementById('otp-error');
+    errEl.style.display = 'none';
+    btn.disabled = true; btn.textContent = 'Verifying...';
+    const r = await api('POST', '/admin/auth/verify-otp', { identifier: _adminEmail, otpCode: otp, userType: 'admin' });
+    btn.disabled = false; btn.textContent = 'Verify Securely';
+    if (r.ok) {
+        localStorage.setItem('rd_token', r.data.token);
+        localStorage.setItem('rd_user', JSON.stringify(r.data));
+        document.getElementById('view-auth').classList.add('hidden');
+        document.getElementById('view-admin').classList.remove('hidden');
+        setAdminName(r.data.name);
+        switchTab('admin-users', 'Partner Master');
+        loadAllData();
+    } else {
+        errEl.textContent = r.error;
+        errEl.style.display = 'block';
+        document.querySelectorAll('#otp-container input').forEach(i=>i.value='');
+        document.querySelector('#otp-container input').focus();
+    }
+});
+
+function setAdminName(name) {
+    document.getElementById('topbar-admin-name').textContent = name || 'Admin';
+    const initials = (name||'AD').split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+    document.getElementById('admin-avatar').textContent = initials;
+}
+
+function switchAuthScreen(id) {
+    document.querySelectorAll('#view-auth .auth-wrapper').forEach(el=>el.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+}
+
+function logout() {
+    localStorage.removeItem('rd_token');
+    localStorage.removeItem('rd_user');
+    document.getElementById('view-admin').classList.add('hidden');
+    document.getElementById('view-auth').classList.remove('hidden');
+    switchAuthScreen('auth-login');
+    document.querySelectorAll('#otp-container input').forEach(i=>i.value='');
+    document.getElementById('login-id').value='';
+    document.querySelectorAll('.sidebar,.mobile-overlay').forEach(el=>el.classList.remove('open'));
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+const TAB_LOADERS = {
+    'admin-users':      loadPartners,
+    'admin-plans':      loadPlans,
+    'admin-promos':     loadPromos,
+    'admin-events':     loadEvents,
+    'admin-categories': loadCategories,
+    'admin-amc':        loadAmc,
+    'admin-autosync':   loadAutoSyncContent,
+    'admin-upload':     loadUploadDropdowns,
+    'admin-roles':      loadRoles,
+    'admin-lms':        loadLms,
+    'admin-approvals':  loadApprovals,
+    'admin-email-config': loadEmailConfig,
+    'admin-change-password': () => {},
+};
+
+function switchTab(targetId, title) {
+    document.querySelectorAll('.tab-content-admin').forEach(el=>el.classList.add('hidden'));
+    document.getElementById(targetId)?.classList.remove('hidden');
+    document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+    document.querySelectorAll(`.nav-item[data-target="${targetId}"]`).forEach(el=>el.classList.add('active'));
+    document.querySelectorAll('.bn-item').forEach(el=>el.classList.remove('active'));
+    document.querySelectorAll(`.bn-item[onclick*="${targetId}"]`).forEach(el=>el.classList.add('active'));
+    document.getElementById('admin-tb-title').innerText = title;
+    document.querySelectorAll('.sidebar,.mobile-overlay').forEach(el=>el.classList.remove('open'));
+    if (TAB_LOADERS[targetId]) TAB_LOADERS[targetId]();
+    // Lazy-load tabs
+    if (targetId === 'admin-push-notifications') { loadFcmConfig(); populatePnPartnerDropdown(); populatePnRoleDropdown(); }
+    if (targetId === 'admin-backoffice')          { loadBoUsers(); }
+    if (targetId === 'admin-roles')               { loadRoles(); }
+    if (targetId === 'admin-lms')                 { loadLms(); }
+    if (targetId === 'admin-email-config')        { loadEmailConfig(); }
+    if (targetId === 'admin-approvals')           { loadApprovals(); }
+}
+function toggleMobileMenu() {
+    document.querySelectorAll('.sidebar,.mobile-overlay').forEach(el=>el.classList.toggle('open'));
+}
+
+// ============================================================
+// LOAD ALL DATA ON LOGIN
+// ============================================================
+async function loadAllData() {
+    loadPartners();
+    populateRoleDropdowns();
+    populatePlanDropdowns();
+    loadPendingBadge();
+}
+
+async function loadPendingBadge() {
+    const r = await api('GET', '/admin/partners/pending');
+    if (!r.ok) return;
+    const badge = document.getElementById('pending-badge');
+    if (r.data.length > 0) {
+        badge.textContent = r.data.length;
+        badge.style.display = 'inline';
+    } else {
+        badge.style.display = 'none';
+    }
+}
+
+// ============================================================
+// PARTNERS
+// ============================================================
+let _allPartners = [];
+
+async function loadPartners() {
+    document.getElementById('partners-tbody').innerHTML = '<tr class="loading-row"><td colspan="6">Loading...</td></tr>';
+    const r = await api('GET', '/admin/partners');
+    if (!r.ok) { document.getElementById('partners-tbody').innerHTML=`<tr class="loading-row"><td colspan="6">${r.error}</td></tr>`; return; }
+    _allPartners = r.data;
+    renderPartnersTable(r.data);
+}
+
+function renderPartnersTable(list) {
+    const tbody = document.getElementById('partners-tbody');
+    if (!list.length) { tbody.innerHTML='<tr class="loading-row"><td colspan="6">No partners found.</td></tr>'; return; }
+    tbody.innerHTML = list.map(p => `
+        <tr>
+            <td><strong>${p.fullName}</strong><br><span style="font-size:12px;color:var(--txt-3)">${p.businessName||''}</span></td>
+            <td>${p.email}<br><span style="font-size:12px;color:var(--txt-3)">${p.mobile}</span></td>
+            <td><span class="badge" style="background:var(--brand-bg);color:var(--brand)">${p.roleName||'—'}</span></td>
+            <td>${p.planName||'—'}</td>
+            <td><span class="badge" style="background:${p.isActive?'var(--brand-bg)':'var(--red-bg)'};color:${p.isActive?'var(--brand)':'var(--red)'}">${p.isActive?'Active':'Inactive'}</span></td>
+            <td style="display:flex;gap:6px;flex-wrap:wrap;">
+                <button class="btn-outline" style="padding:4px 8px;font-size:11px;" onclick="editPartnerModal(${p.id})">Edit</button>
+                <button class="btn-outline" style="padding:4px 8px;font-size:11px;color:var(--red);" onclick="deactivatePartner(${p.id},'${p.fullName}')">Deactivate</button>
+            </td>
+        </tr>`).join('');
+}
+
+function filterPartners(q) {
+    if (!q) { renderPartnersTable(_allPartners); return; }
+    const f = q.toLowerCase();
+    renderPartnersTable(_allPartners.filter(p => p.fullName.toLowerCase().includes(f) || p.email.toLowerCase().includes(f)));
+}
+
+function togglePartnerForm() {
+    document.getElementById('onboard-partner-card').classList.toggle('hidden');
+}
+
+async function createPartner() {
+    const btn = document.getElementById('create-partner-btn');
+    btn.disabled = true; btn.textContent = 'Creating...';
+    const data = {
+        fullName: document.getElementById('p-name').value,
+        email:    document.getElementById('p-email').value,
+        mobile:   document.getElementById('p-mobile').value,
+        arnNumber:    document.getElementById('p-arn').value || null,
+        businessName: document.getElementById('p-biz').value || null,
+        roleId: parseInt(document.getElementById('p-role').value) || null,
+        planId: parseInt(document.getElementById('p-plan').value) || null,
+        password: document.getElementById('p-pass').value || null,
+    };
+    const r = await api('POST', '/admin/partners', data);
+    btn.disabled = false; btn.textContent = 'Create Partner Account';
+    if (r.ok) {
+        toast('Partner created successfully!');
+        togglePartnerForm();
+        loadPartners();
+    } else toast(r.error, 'error');
+}
+
+async function deactivatePartner(id, name) {
+    if (!confirm(`Deactivate partner "${name}"?`)) return;
+    const r = await api('DELETE', `/admin/partners/${id}`);
+    if (r.ok) { toast('Partner deactivated.'); loadPartners(); }
+    else toast(r.error, 'error');
+}
+
+async function editPartnerModal(id) {
+    const p = _allPartners.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('p-name').value   = p.fullName;
+    document.getElementById('p-email').value  = p.email;
+    document.getElementById('p-mobile').value = p.mobile;
+    document.getElementById('p-arn').value    = p.arnNumber||'';
+    document.getElementById('p-biz').value    = p.businessName||'';
+    document.getElementById('onboard-partner-card').classList.remove('hidden');
+    document.getElementById('create-partner-btn').textContent = 'Update Partner';
+    document.getElementById('create-partner-btn').onclick = async () => {
+        const data = {
+            fullName: document.getElementById('p-name').value,
+            email:    document.getElementById('p-email').value,
+            mobile:   document.getElementById('p-mobile').value,
+            arnNumber: document.getElementById('p-arn').value||null,
+            businessName: document.getElementById('p-biz').value||null,
+            roleId: parseInt(document.getElementById('p-role').value)||null,
+            planId: parseInt(document.getElementById('p-plan').value)||null,
+            password: document.getElementById('p-pass').value||null,
+        };
+        const r = await api('PUT', `/admin/partners/${id}`, data);
+        if (r.ok) { toast('Partner updated!'); togglePartnerForm(); loadPartners(); document.getElementById('create-partner-btn').textContent='Create Partner Account'; document.getElementById('create-partner-btn').onclick=createPartner; }
+        else toast(r.error, 'error');
+    };
+}
+
+// ============================================================
+// PLANS
+// ============================================================
+async function loadPlans() {
+    document.getElementById('plans-tbody').innerHTML='<tr class="loading-row"><td colspan="6">Loading...</td></tr>';
+    const r = await api('GET', '/admin/plans');
+    if (!r.ok) return;
+    const tbody = document.getElementById('plans-tbody');
+    if (!r.data.length) { tbody.innerHTML='<tr class="loading-row"><td colspan="6">No plans found.</td></tr>'; return; }
+    tbody.innerHTML = r.data.map(p=>`
+        <tr>
+            <td style="font-weight:600;color:var(--txt-1)">${p.name}</td>
+            <td>₹ ${p.monthlyPrice.toLocaleString('en-IN')}</td>
+            <td>₹ ${p.yearlyPrice.toLocaleString('en-IN')}</td>
+            <td>${p.roleName||'—'}</td>
+            <td><span class="badge" style="background:${p.isActive?'var(--brand-bg)':'var(--red-bg)'};color:${p.isActive?'var(--brand)':'var(--red)'}">${p.isActive?'Active':'Inactive'}</span></td>
+            <td><button class="btn-outline" style="padding:4px 8px;font-size:11px;" onclick="fillPlanEdit(${p.id},'${p.name}',${p.monthlyPrice},${p.yearlyPrice},${p.roleId||0})">Edit</button></td>
+        </tr>`).join('');
+}
+
+async function savePlan() {
+    const editId = document.getElementById('plan-name').dataset.editId;
+    const data = {
+        name: document.getElementById('plan-name').value,
+        monthlyPrice: parseFloat(document.getElementById('plan-monthly').value)||0,
+        yearlyPrice:  parseFloat(document.getElementById('plan-yearly').value)||0,
+        roleId: parseInt(document.getElementById('plan-role').value)||null,
+    };
+    const r = editId
+        ? await api('PUT', `/admin/plans/${editId}`, data)
+        : await api('POST', '/admin/plans', data);
+    if (r.ok) {
+        toast(editId?'Plan updated!':'Plan created!');
+        ['plan-name','plan-monthly','plan-yearly'].forEach(id=>{ document.getElementById(id).value=''; });
+        delete document.getElementById('plan-name').dataset.editId;
+        loadPlans(); populatePlanDropdowns();
+    } else toast(r.error,'error');
+}
+
+function fillPlanEdit(id,name,monthly,yearly,roleId) {
+    document.getElementById('plan-name').value=name;
+    document.getElementById('plan-name').dataset.editId=id;
+    document.getElementById('plan-monthly').value=monthly;
+    document.getElementById('plan-yearly').value=yearly;
+    document.getElementById('plan-role').value=roleId;
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ============================================================
+// PROMOS
+// ============================================================
+async function loadPromos() {
+    document.getElementById('promos-tbody').innerHTML='<tr class="loading-row"><td colspan="6">Loading...</td></tr>';
+    const r = await api('GET', '/admin/promos');
+    if (!r.ok) return;
+    const tbody = document.getElementById('promos-tbody');
+    if (!r.data.length) { tbody.innerHTML='<tr class="loading-row"><td colspan="6">No promo codes found.</td></tr>'; return; }
+    tbody.innerHTML = r.data.map(p => {
+        const expired = p.expiresAt && new Date(p.expiresAt) < new Date();
+        const maxedOut = p.maxUses && p.usedCount >= p.maxUses;
+        const isLive = p.isActive && !expired && !maxedOut;
+        return `<tr>
+            <td style="font-weight:700;color:var(--brand);font-family:'Sora'">${p.code}</td>
+            <td>${p.discountType==='percentage'?p.discountValue+'% Off':'₹ '+p.discountValue+' Off'}</td>
+            <td>${p.usedCount} / <span style="color:var(--txt-4)">${p.maxUses??'Unlimited'}</span></td>
+            <td>${p.expiresAt?new Date(p.expiresAt).toDateString():'No Expiry'}</td>
+            <td><span class="badge" style="background:${isLive?'var(--brand-bg)':'var(--red-bg)'};color:${isLive?'var(--brand)':'var(--red)'}">${isLive?'Active':'Expired / Used'}</span></td>
+            <td style="display:flex;gap:6px;">
+                ${isLive?`<button class="btn-outline" style="padding:4px 8px;font-size:11px;color:var(--red);" onclick="deactivatePromo(${p.id})">Deactivate</button>`:''}
+                <button class="btn-outline" style="padding:4px 8px;font-size:11px;color:var(--red);" onclick="deletePromo(${p.id},'${p.code}')">Delete</button>
+            </td>
+        </tr>`;}).join('');
+}
+
+async function createPromo() {
+    const data = {
+        code:          document.getElementById('promo-code').value.toUpperCase(),
+        discountType:  document.getElementById('promo-type').value,
+        discountValue: parseFloat(document.getElementById('promo-value').value)||0,
+        expiresAt:     document.getElementById('promo-expiry').value||null,
+        maxUses:       parseInt(document.getElementById('promo-maxuses').value)||null,
+    };
+    if (!data.code) { toast('Enter promo code','error'); return; }
+    const r = await api('POST', '/admin/promos', data);
+    if (r.ok) { toast('Promo code created!'); ['promo-code','promo-value','promo-expiry','promo-maxuses'].forEach(id=>document.getElementById(id).value=''); loadPromos(); }
+    else toast(r.error,'error');
+}
+
+async function deactivatePromo(id) {
+    const r = await api('PUT', `/admin/promos/${id}/deactivate`);
+    if (r.ok) { toast('Promo deactivated.'); loadPromos(); }
+    else toast(r.error,'error');
+}
+
+async function deletePromo(id, code) {
+    if (!confirm(`Delete promo "${code}"?`)) return;
+    const r = await api('DELETE', `/admin/promos/${id}`);
+    if (r.ok) { toast('Deleted.'); loadPromos(); }
+    else toast(r.error,'error');
+}
+
+// ============================================================
+// EVENTS
+// ============================================================
+async function loadEvents() {
+    document.getElementById('events-tbody').innerHTML='<tr class="loading-row"><td colspan="6">Loading...</td></tr>';
+    const r = await api('GET', '/admin/events');
+    if (!r.ok) return;
+    const tbody = document.getElementById('events-tbody');
+    if (!r.data.length) { tbody.innerHTML='<tr class="loading-row"><td colspan="6">No events.</td></tr>'; return; }
+    tbody.innerHTML = r.data.map(e => `
+        <tr>
+            <td style="font-weight:600;color:var(--txt-1)">${e.title}</td>
+            <td><span class="badge" style="background:${e.eventType==='webinar'?'var(--blue-bg)':'var(--amber-bg)'};color:${e.eventType==='webinar'?'var(--blue)':'var(--amber)'}">${e.eventType==='webinar'?'Webinar':'Physical'}</span></td>
+            <td>${new Date(e.eventDate).toLocaleString('en-IN',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}</td>
+            <td>${e.speakerName||'—'}</td>
+            <td><span class="badge" style="background:${e.status==='upcoming'?'var(--brand-bg)':'var(--surface2)'};color:${e.status==='upcoming'?'var(--brand)':'var(--txt-3)'}">${e.status}</span></td>
+            <td style="display:flex;gap:6px;">
+                <button class="btn-outline" style="padding:4px 8px;font-size:11px;" onclick="fillEventEdit(${e.id},'${e.title.replace(/'/g,"\\'")}','${e.eventType}','${e.eventDate}','${e.speakerName||''}','${e.locationLink||''}')">Edit</button>
+                ${e.status!=='cancelled'?`<button class="btn-outline" style="padding:4px 8px;font-size:11px;color:var(--red);" onclick="cancelEvent(${e.id})">Cancel</button>`:''}
+            </td>
+        </tr>`).join('');
+}
+async function handleCreateEvent() {
+console.log("data")
+    const editId = document.getElementById('ev-title').dataset.editId;
+    const date   = document.getElementById('ev-date').value;
+    const time   = document.getElementById('ev-time').value;
+console.log("!date || !time",(!date || !time))
+    if (!date || !time) { toast('Select date and time','error'); return; }
+    const data = {
+        title:        document.getElementById('ev-title').value,
+        eventType:    document.getElementById('ev-type').value,
+        eventDate:    `${date}T${time}:00`,
+        speakerName:  document.getElementById('ev-speaker').value||null,
+        locationLink: document.getElementById('ev-loc').value||null,
+    };
+console.log(data)
+    const r = editId
+        ? await api('PUT', `/admin/events/${editId}`, data)
+        : await api('POST', '/admin/events', data);
+    if (r.ok) {
+        toast(editId?'Event updated!':'Event created!');
+        ['ev-title','ev-date','ev-time','ev-speaker','ev-loc'].forEach(id=>document.getElementById(id).value='');
+        delete document.getElementById('ev-title').dataset.editId;
+        loadEvents();
+    } else toast(r.error,'error');
+}
+
+function fillEventEdit(id,title,type,dateStr,speaker,loc) {
+    document.getElementById('ev-title').value = title;
+    document.getElementById('ev-title').dataset.editId = id;
+    document.getElementById('ev-type').value = type;
+    const d = new Date(dateStr);
+    document.getElementById('ev-date').value = d.toISOString().slice(0,10);
+    document.getElementById('ev-time').value = d.toTimeString().slice(0,5);
+    document.getElementById('ev-speaker').value = speaker;
+    document.getElementById('ev-loc').value = loc;
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+
+async function cancelEvent(id) {
+    if (!confirm('Cancel this event?')) return;
+    const r = await api('PUT', `/admin/events/${id}/cancel`);
+    if (r.ok) { toast('Event cancelled.'); loadEvents(); }
+    else toast(r.error,'error');
+}
+
+// ============================================================
+// CATEGORIES
+// ============================================================
+async function loadCategories() {
+    document.getElementById('categories-tbody').innerHTML='<tr class="loading-row"><td colspan="3">Loading...</td></tr>';
+    const r = await api('GET', '/admin/categories');
+    if (!r.ok) return;
+    const tbody = document.getElementById('categories-tbody');
+    if (!r.data.length) { tbody.innerHTML='<tr class="loading-row"><td colspan="3">No categories.</td></tr>'; return; }
+    tbody.innerHTML = r.data.map(c=>`
+        <tr>
+            <td style="font-weight:700;color:var(--txt-1)">${c.name}</td>
+            <td>${(c.children||[]).map(ch=>`<span class="cat-tag">${ch.name}</span>`).join('')||'<span style="color:var(--txt-4);font-size:12px">No sub-categories</span>'}</td>
+            <td><button class="btn-outline" style="padding:4px 8px;font-size:11px;color:var(--red);" onclick="deleteCategory(${c.id},'${c.name}')">Delete</button></td>
+        </tr>`).join('');
+    // Populate parent dropdown
+    const sel = document.getElementById('cat-parent');
+    sel.innerHTML = '<option value="">-- New Parent Category --</option>' +
+        r.data.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+}
+
+async function saveCategory() {
+    const name     = document.getElementById('cat-name').value.trim();
+    const parentId = parseInt(document.getElementById('cat-parent').value)||null;
+    if (!name) { toast('Enter category name','error'); return; }
+    const r = await api('POST', '/admin/categories', { name, parentId });
+    if (r.ok) { toast('Category saved!'); document.getElementById('cat-name').value=''; loadCategories(); }
+    else toast(r.error,'error');
+}
+
+async function deleteCategory(id, name) {
+    if (!confirm(`Delete category "${name}"?`)) return;
+    const r = await api('DELETE', `/admin/categories/${id}`);
+    if (r.ok) { toast('Deleted.'); loadCategories(); }
+    else toast(r.error,'error');
+}
+
+// ============================================================
+// AMC
+// ============================================================
+let _editAmcId = null;
+
+async function loadAmc() {
+    document.getElementById('amc-tbody').innerHTML='<tr class="loading-row"><td colspan="4">Loading...</td></tr>';
+    const r = await api('GET', '/admin/amc');
+    if (!r.ok) return;
+    const tbody = document.getElementById('amc-tbody');
+    if (!r.data.length) { tbody.innerHTML='<tr class="loading-row"><td colspan="4">No AMCs registered.</td></tr>'; return; }
+    tbody.innerHTML = r.data.map(a=>`
+        <tr>
+            <td style="font-weight:600;color:var(--txt-1)">${a.name}</td>
+            <td><span class="badge" style="background:${a.autoSyncEnabled?'var(--brand-bg)':'var(--surface2)'};color:${a.autoSyncEnabled?'var(--brand)':'var(--txt-3)'}">${a.autoSyncEnabled?'Active & Fetching':'Disabled'}</span></td>
+            <td style="font-family:monospace;color:var(--txt-3)">${a.youtubeChannelId||'—'}</td>
+            <td><button class="btn-outline" style="padding:4px 8px;font-size:11px;" onclick="fillAmcEdit(${a.id},'${a.name}','${a.instagramUrl||''}','${a.youtubeChannelId||''}',${a.autoSyncEnabled})">Edit</button></td>
+        </tr>`).join('');
+}
+
+async function saveAmc() {
+    const data = {
+        name:              document.getElementById('amc-name').value.trim(),
+        instagramUrl:      document.getElementById('amc-insta').value||null,
+        youtubeChannelId:  document.getElementById('amc-ytid').value||null,
+        autoSyncEnabled:   document.getElementById('amc-autosync').value === 'true',
+    };
+    if (!data.name) { toast('Enter AMC name','error'); return; }
+    const r = _editAmcId
+        ? await api('PUT', `/admin/amc/${_editAmcId}`, data)
+        : await api('POST', '/admin/amc', data);
+    if (r.ok) {
+        toast(_editAmcId?'AMC updated!':'AMC saved!');
+        _editAmcId = null;
+        ['amc-name','amc-insta','amc-ytid'].forEach(id=>document.getElementById(id).value='');
+        loadAmc();
+    } else toast(r.error,'error');
+}
+
+function fillAmcEdit(id,name,insta,ytid,autoSync) {
+    _editAmcId = id;
+    document.getElementById('amc-name').value = name;
+    document.getElementById('amc-insta').value = insta;
+    document.getElementById('amc-ytid').value = ytid;
+    document.getElementById('amc-autosync').value = String(autoSync);
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ============================================================
+// AUTO-SYNC TAB (shows content from DB with source=auto_sync)
+// ============================================================
+async function loadAutoSyncContent() {
+    document.getElementById('autosync-videos-grid').innerHTML = '<div style="text-align:center;color:var(--txt-4);padding:32px;grid-column:1/-1">Loading...</div>';
+    document.getElementById('sync-channel-count').textContent = '…';
+    document.getElementById('sync-video-count').textContent = '…';
+
+    const amcR = await api('GET','/admin/amc');
+    const active = amcR.ok ? amcR.data.filter(a=>a.autoSyncEnabled).length : 0;
+    document.getElementById('sync-channel-count').textContent = active + ' Active';
+
+    const contentR = await api('GET','/admin/content?assetType=embed');
+    if (!contentR.ok) {
+        document.getElementById('autosync-videos-grid').innerHTML =
+            `<div style="text-align:center;color:var(--red);padding:32px;grid-column:1/-1">
+                ❌ Failed to load content: ${contentR.error || 'API error'}<br>
+                <span style="font-size:12px;color:var(--txt-3);">Check that /admin/content endpoint is responding.</span>
+             </div>`;
+        document.getElementById('sync-video-count').textContent = 'Error';
+        return;
+    }
+
+    // Accept both 'auto_sync' and 'autoSync' source values for robustness
+    const videos = (contentR.data || []).filter(c =>
+        c.source === 'auto_sync' || c.source === 'autoSync' ||
+        c.source === 'youtube_sync' || c.isAutoSync === true
+    );
+    document.getElementById('sync-video-count').textContent = videos.length + ' Videos';
+
+    const grid = document.getElementById('autosync-videos-grid');
+    if (!videos.length) {
+        const totalEmbed = (contentR.data || []).length;
+        grid.innerHTML = `<div style="text-align:center;color:var(--txt-4);padding:32px;grid-column:1/-1">
+            <div style="font-size:32px;margin-bottom:8px;">📭</div>
+            <div style="font-weight:600;margin-bottom:4px;">No auto-synced videos found</div>
+            <div style="font-size:12px;margin-top:4px;">${totalEmbed} total embed content in DB — none with source=auto_sync.</div>
+            <div style="font-size:12px;margin-top:8px;color:var(--txt-3);">
+                Make sure AMC channels above have Auto-Fetch = Yes and a valid YouTube Channel ID.<br>
+                The backend sync job must run to populate videos here.
+            </div>
+        </div>`;
+        return;
+    }
+    grid.innerHTML = videos.map(v => {
+        const ytId = extractYouTubeId(v.embedUrl || v.assetUrl || v.url || '');
+        const dateStr = v.createdAt ? new Date(v.createdAt).toLocaleDateString('en-IN', {day:'2-digit',month:'short',year:'numeric'}) : '';
+        return `<div class="video-card">
+            <div class="video-player-container">
+                ${ytId
+                    ? `<iframe src="https://www.youtube.com/embed/${ytId}?rel=0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>`
+                    : `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:#aaa;font-size:12px;gap:4px;background:#111;">
+                           <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                           <span>No YouTube ID found</span>
+                           <span style="font-size:10px;opacity:0.6;max-width:120px;text-align:center;word-break:break-all;">${(v.embedUrl||v.assetUrl||'').substring(0,40)}</span>
+                       </div>`}
+            </div>
+            <div class="video-details">
+                <div style="font-size:11px;color:var(--txt-3);font-weight:600">${dateStr}</div>
+                <h4 style="font-size:13px;color:var(--txt-1);font-weight:600;margin:0;line-height:1.4">${v.title || 'Untitled'}</h4>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:8px;">
+                    <span class="badge" style="background:#fee2e2;color:#ef4444;font-size:11px;">${v.amcName || v.amc || 'AMC'}</span>
+                    <button class="btn-outline" style="padding:3px 8px;font-size:11px;color:var(--red);border:1px solid var(--red);" onclick="removeContent(${v.id})">Remove</button>
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function extractYouTubeId(url) {
+    if (!url) return null;
+    // Handle all YouTube URL formats:
+    // - https://www.youtube.com/watch?v=ID
+    // - https://youtu.be/ID
+    // - https://www.youtube.com/embed/ID
+    // - https://www.youtube.com/shorts/ID
+    // - https://m.youtube.com/watch?v=ID
+    const patterns = [
+        /(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+        /^([a-zA-Z0-9_-]{11})$/ // bare ID
+    ];
+    for (const re of patterns) {
+        const m = url.match(re);
+        if (m && m[1]) return m[1];
+    }
+    return null;
+}
+
+// ============================================================
+// UPLOAD CONTENT
+// ============================================================
+async function loadUploadDropdowns() {
+    const catR = await api('GET','/admin/categories');
+    if (catR.ok) {
+        const sel = document.getElementById('upload-parent');
+        sel.innerHTML = '<option value="">-- Select --</option>' +
+            catR.data.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+        window._allCategories = catR.data;
+    }
+    const amcR = await api('GET','/admin/amc');
+    if (amcR.ok) {
+        const sel = document.getElementById('upload-amc');
+        sel.innerHTML = '<option value="">General / No Specific AMC</option>' +
+            amcR.data.map(a=>`<option value="${a.id}">${a.name}</option>`).join('');
+    }
+    loadContentTable();
+}
+
+function loadSubCategories(parentId) {
+    const sub = document.getElementById('upload-sub');
+    if (!parentId || !window._allCategories) { sub.innerHTML='<option>-- Select Parent First --</option>'; sub.disabled=true; return; }
+    const parent = window._allCategories.find(c=>c.id==parentId);
+    const children = parent?.children||[];
+    if (!children.length) { sub.innerHTML='<option>No Sub-Categories</option>'; sub.disabled=true; return; }
+    sub.disabled = false;
+    sub.innerHTML = '<option value="">-- Select Sub-Category --</option>' + children.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+}
+
+function toggleUploadType() {
+    const t = document.getElementById('upload-type').value;
+    document.getElementById('upload-file-area').classList.toggle('hidden', t!=='file');
+    document.getElementById('upload-embed-area').classList.toggle('hidden', t!=='embed');
+}
+
+async function publishContent() {
+    const title   = document.getElementById('up-title').value.trim();
+    const type    = document.getElementById('upload-type').value;
+    const catId   = parseInt(document.getElementById('upload-sub').value) || parseInt(document.getElementById('upload-parent').value) || null;
+    const amcId   = parseInt(document.getElementById('upload-amc').value) || null;
+    if (!title) { toast('Enter asset title','error'); return; }
+    let r;
+    if (type === 'embed') {
+        const embedUrl = document.getElementById('embed-url').value.trim();
+        if (!embedUrl) { toast('Enter embed URL','error'); return; }
+        r = await api('POST','/admin/content/embed',{ title, assetType:'embed', categoryId:catId, amcId, embedUrl });
+    } else {
+        const file = document.getElementById('file-input').files[0];
+        if (!file) { toast('Select a file','error'); return; }
+        const fd = new FormData();
+        fd.append('file',file); fd.append('title',title);
+        fd.append('assetType', file.type.startsWith('video')?'video':file.type.startsWith('image')?'image':'pdf');
+        if (catId) fd.append('categoryId',catId);
+        if (amcId) fd.append('amcId',amcId);
+        r = await api('POST','/admin/content/upload',fd,true);
+    }
+    if (r.ok) { toast('Content published!'); document.getElementById('up-title').value=''; loadContentTable(); }
+    else toast(r.error,'error');
+}
+
+async function loadContentTable() {
+    document.getElementById('content-tbody').innerHTML='<tr class="loading-row"><td colspan="6">Loading...</td></tr>';
+    const r = await api('GET','/admin/content');
+    if (!r.ok) return;
+    const tbody = document.getElementById('content-tbody');
+    if (!r.data.length) { tbody.innerHTML='<tr class="loading-row"><td colspan="6">No content published yet.</td></tr>'; return; }
+    tbody.innerHTML = r.data.map(c=>`
+        <tr>
+            <td style="font-weight:600;color:var(--txt-1);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.title}</td>
+            <td><span class="badge" style="background:var(--blue-bg);color:var(--blue)">${c.assetType}</span></td>
+            <td>${c.categoryName||'—'}</td>
+            <td>${c.amcName||'—'}</td>
+            <td style="font-size:12px;color:var(--txt-3)">${new Date(c.createdAt).toDateString()}</td>
+            <td><button class="btn-outline" style="padding:4px 8px;font-size:11px;color:var(--red);" onclick="removeContent(${c.id})">Remove</button></td>
+        </tr>`).join('');
+}
+
+async function removeContent(id) {
+    if (!confirm('Remove this asset?')) return;
+    const r = await api('DELETE',`/admin/content/${id}`);
+    if (r.ok) { toast('Removed.'); loadContentTable(); loadAutoSyncContent(); }
+    else toast(r.error,'error');
+}
+
+// ============================================================
+// RBAC ROLES
+// ============================================================
+const FEATURE_AREAS = [
+    'Dashboard Analytics','Search & Content Library','My Collections',
+    'Event Registrations','Auto Cobrand Settings','Personalization (Colors/Fonts)',
+    'Campaign Planner','Financial Calculators Suite','Regnum Academy (LMS)',
+    'Portal Documentation','Activity Logs'
+];
+let _currentRoleId = null;
+
+async function loadRoles() {
+    const r = await api('GET','/admin/roles');
+    if (!r.ok) return;
+    const list = document.getElementById('roles-list');
+    list.innerHTML = r.data.map(role=>`
+        <div class="role-item" id="role-item-${role.id}" onclick="selectRole(${role.id},'${role.name.replace(/'/g,"\\'")}',this)">
+            <span style="font-weight:600;font-size:13.5px">${role.name}</span>
+        </div>`).join('');
+    // Select first role by default
+    if (r.data.length) selectRole(r.data[0].id, r.data[0].name, document.getElementById(`role-item-${r.data[0].id}`), r.data[0].permissions);
+    buildPermissionsMatrix([]);
+}
+
+function buildPermissionsMatrix(existingPerms) {
+    const tbody = document.getElementById('permissions-table-body');
+    tbody.innerHTML = FEATURE_AREAS.map(area => {
+        const p = existingPerms.find(x=>x.featureArea===area)||{canView:false,canEdit:false,canDelete:false,canExport:false};
+        return `<tr>
+            <td style="font-weight:600;color:var(--txt-1);font-size:13.5px">${area}</td>
+            <td style="text-align:center"><input type="checkbox" class="perm-cb" data-area="${area}" data-perm="view" ${p.canView?'checked':''}></td>
+            <td style="text-align:center"><input type="checkbox" class="perm-cb" data-area="${area}" data-perm="edit" ${p.canEdit?'checked':''}></td>
+            <td style="text-align:center"><input type="checkbox" class="perm-cb" data-area="${area}" data-perm="delete" ${p.canDelete?'checked':''}></td>
+            <td style="text-align:center"><input type="checkbox" class="perm-cb" data-area="${area}" data-perm="export" ${p.canExport?'checked':''}></td>
+        </tr>`;}).join('');
+}
+
+async function selectRole(id, name, el, permsArg) {
+    _currentRoleId = id;
+    document.querySelectorAll('.role-item').forEach(x=>x.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('role-name-input').value = name;
+    document.getElementById('save-role-btn').textContent = 'Save Permissions';
+    let perms = permsArg;
+    if (!perms) {
+        const r = await api('GET','/admin/roles');
+        if (r.ok) perms = r.data.find(x=>x.id===id)?.permissions || [];
+    }
+    buildPermissionsMatrix(perms);
+}
+
+function createNewRole() {
+    _currentRoleId = null;
+    document.querySelectorAll('.role-item').forEach(x=>x.classList.remove('active'));
+    document.getElementById('role-name-input').value = '';
+    document.getElementById('role-name-input').placeholder = 'Type new role name...';
+    document.getElementById('role-name-input').focus();
+    document.getElementById('save-role-btn').textContent = 'Save New Role';
+    buildPermissionsMatrix([]);
+}
+
+async function saveRole() {
+    const name = document.getElementById('role-name-input').value.trim();
+    if (!name) { toast('Enter role name','error'); return; }
+    const permissions = FEATURE_AREAS.map(area => ({
+        featureArea: area,
+        canView:   document.querySelector(`input[data-area="${area}"][data-perm="view"]`)?.checked||false,
+        canEdit:   document.querySelector(`input[data-area="${area}"][data-perm="edit"]`)?.checked||false,
+        canDelete: document.querySelector(`input[data-area="${area}"][data-perm="delete"]`)?.checked||false,
+        canExport: document.querySelector(`input[data-area="${area}"][data-perm="export"]`)?.checked||false,
+    }));
+    const r = await api('POST','/admin/roles',{ name, permissions });
+    if (r.ok) { toast('Role saved!'); loadRoles(); populateRoleDropdowns(); }
+    else toast(r.error,'error');
+}
+
+// ============================================================
+// LMS
+// ============================================================
+async function loadLms() {
+    const r = await api('GET','/lms/courses');
+    if (!r.ok) return;
+    const container = document.getElementById('lms-courses-list');
+    if (!r.data.length) { container.innerHTML='<p style="color:var(--txt-3)">No courses found.</p>'; return; }
+    container.innerHTML = r.data.map(c=>`
+        <div style="background:var(--surface2);padding:16px;border:1px solid var(--border);border-radius:8px;margin-bottom:16px;">
+            <div style="font-weight:700;font-size:15px;margin-bottom:12px">${c.title}</div>
+            ${c.lessons.map(l=>`
+                <div style="display:flex;gap:10px;margin-top:8px;align-items:center;">
+                    <span class="badge" style="background:var(--blue-bg);color:var(--blue)">${l.lessonType}</span>
+                    <span style="font-size:13px">${l.title}</span>
+                </div>`).join('')}
+        </div>`).join('');
+}
+
+// ============================================================
+// DROPDOWN POPULATORS
+// ============================================================
+async function populateRoleDropdowns() {
+    const r = await api('GET','/admin/roles');
+    if (!r.ok) return;
+    const opts = r.data.map(x=>`<option value="${x.id}">${x.name}</option>`).join('');
+    ['p-role','plan-role'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = '<option value="">-- Select Role --</option>' + opts;
+    });
+}
+
+async function populatePlanDropdowns() {
+    const r = await api('GET','/admin/plans');
+    if (!r.ok) return;
+    const el = document.getElementById('p-plan');
+    if (el) el.innerHTML = '<option value="">-- Select Plan --</option>' +
+        r.data.map(x=>`<option value="${x.id}">${x.name} (₹${x.monthlyPrice}/mo)</option>`).join('');
+}
+// ============================================================
+// PARTNER APPROVALS
+// ============================================================
+async function loadApprovals() {
+    const tbody = document.getElementById('approvals-tbody');
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--txt-4)">Loading...</td></tr>';
+    const r = await api('GET', '/admin/partners/pending');
+    if (!r.ok) { tbody.innerHTML = `<tr><td colspan="7" style="color:var(--red);padding:24px;text-align:center;">${r.error}</td></tr>`; return; }
+    if (!r.data.length) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:32px;color:var(--txt-4)">✅ No pending approvals.</td></tr>'; return; }
+    tbody.innerHTML = r.data.map(p => `
+        <tr>
+            <td><strong>${p.fullName}</strong></td>
+            <td>${p.email}</td>
+            <td>${p.mobile||'-'}</td>
+            <td>${p.arnNumber||'-'}</td>
+            <td>${p.businessName||'-'}</td>
+            <td style="font-size:12px;color:var(--txt-3)">${new Date(p.createdAt).toLocaleDateString()}</td>
+            <td>
+                <div style="display:flex;gap:6px;">
+                    <button class="btn-cta" style="padding:6px 12px;font-size:12px;background:var(--brand);" onclick="approvePartner(${p.id},'approve',this)">✓ Approve</button>
+                    <button class="btn-outline" style="padding:6px 12px;font-size:12px;color:var(--red);border-color:var(--red);" onclick="approvePartner(${p.id},'reject',this)">✗ Reject</button>
+                </div>
+            </td>
+        </tr>`).join('');
+}
+
+async function approvePartner(id, action, btn) {
+    let reason = null;
+    if (action === 'reject') {
+        reason = prompt('Enter rejection reason (optional):');
+        if (reason === null) return; // cancelled
+    }
+    btn.disabled = true;
+    const r = await api('POST', `/admin/partners/${id}/approval`, { action, rejectionReason: reason });
+    if (r.ok) { toast(r.data.message); loadApprovals(); loadPendingBadge(); }
+    else { toast(r.error, 'error'); btn.disabled = false; }
+}
+
+// ============================================================
+// EMAIL CONFIG
+// ============================================================
+async function loadEmailConfig() {
+    const r = await api('GET', '/admin/email-config');
+    if (!r.ok) return;
+    const d = r.data;
+    document.getElementById('cfg-smtp-host').value  = d.smtpHost || 'smtp.gmail.com';
+    document.getElementById('cfg-smtp-port').value  = d.smtpPort || 587;
+    document.getElementById('cfg-smtp-user').value  = d.smtpUser || '';
+    document.getElementById('cfg-smtp-pass').value  = d.smtpPassword || '';
+    document.getElementById('cfg-from-name').value  = d.fromName || 'Regnum Digital';
+    document.getElementById('cfg-from-email').value = d.fromEmail || '';
+    // Load first template by default
+    loadTemplateEditor();
+}
+
+async function saveEmailConfig() {
+    const data = {
+        smtpHost:     document.getElementById('cfg-smtp-host').value,
+        smtpPort:     parseInt(document.getElementById('cfg-smtp-port').value) || 587,
+        smtpUser:     document.getElementById('cfg-smtp-user').value,
+        smtpPassword: document.getElementById('cfg-smtp-pass').value,
+        fromName:     document.getElementById('cfg-from-name').value,
+        fromEmail:    document.getElementById('cfg-from-email').value,
+        isActive:     true,
+        id: 0
+    };
+    const r = await api('POST', '/admin/email-config', data);
+    if (r.ok) toast('Email configuration saved!');
+    else toast(r.error, 'error');
+}
+
+async function testEmailConfig() {
+    const testEmail = document.getElementById('cfg-test-email').value.trim();
+    const res = document.getElementById('email-test-result');
+    if (!testEmail) { res.textContent = '⚠️ Enter a test email address above.'; res.style.color = 'var(--yellow,#f59e0b)'; return; }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(testEmail)) { res.textContent = '⚠️ Please enter a valid email address.'; res.style.color = 'var(--yellow,#f59e0b)'; return; }
+    const host = document.getElementById('cfg-smtp-host').value.trim();
+    if (!host) { res.textContent = '⚠️ Save your SMTP configuration first before testing.'; res.style.color = 'var(--yellow,#f59e0b)'; return; }
+    res.innerHTML = '<span style="opacity:0.7">⏳ Sending test email to <strong>' + testEmail + '</strong>...</span>';
+    res.style.color = 'var(--txt-3)';
+    const r = await api('POST', '/admin/email-config/test', { email: testEmail });
+    if (r.ok) {
+        res.innerHTML = '✅ Test email sent to <strong>' + testEmail + '</strong>! Check your inbox (and spam folder).';
+        res.style.color = 'var(--brand)';
+    } else {
+        const errMsg = r.error || 'Unknown error';
+        let hint = '';
+        if (errMsg.toLowerCase().includes('535') || errMsg.toLowerCase().includes('auth')) hint = '<br><span style="font-size:11px;opacity:0.85">💡 Auth failed. For AWS SES: use SMTP credentials (not IAM keys). Generate at SES Console → SMTP Settings.</span>';
+        else if (errMsg.toLowerCase().includes('454') || errMsg.toLowerCase().includes('tls')) hint = '<br><span style="font-size:11px;opacity:0.85">💡 TLS error. Try port 465 (SSL) or ensure STARTTLS is enabled.</span>';
+        else if (errMsg.toLowerCase().includes('timeout') || errMsg.toLowerCase().includes('connect')) hint = '<br><span style="font-size:11px;opacity:0.85">💡 Connection timeout. Check firewall rules — your server must allow outbound on port 587.</span>';
+        else if (errMsg.toLowerCase().includes('sender') || errMsg.toLowerCase().includes('not verified')) hint = '<br><span style="font-size:11px;opacity:0.85">💡 Sender not verified. In AWS SES sandbox mode, verify your From Email at SES → Verified Identities.</span>';
+        res.innerHTML = '❌ ' + errMsg + hint;
+        res.style.color = 'var(--red)';
+    }
+}
+
+const SMTP_PRESETS = {
+    ses_us_east:  { host: 'email-smtp.us-east-1.amazonaws.com',  port: 587, note: true },
+    ses_ap_south: { host: 'email-smtp.ap-south-1.amazonaws.com', port: 587, note: true },
+    gmail:        { host: 'smtp.gmail.com',   port: 587, note: false },
+    outlook:      { host: 'smtp.office365.com', port: 587, note: false },
+};
+function applySmtpPreset(key) {
+    const p = SMTP_PRESETS[key];
+    if (!p) return;
+    document.getElementById('cfg-smtp-host').value = p.host;
+    document.getElementById('cfg-smtp-port').value = p.port;
+    const hint = document.getElementById('ses-hint');
+    if (hint) hint.style.display = p.note ? 'block' : 'none';
+    if (p.note) {
+        document.getElementById('cfg-smtp-user').placeholder = 'SMTP Access Key ID (starts with AKIA...)';
+        document.getElementById('cfg-smtp-pass').placeholder = 'SMTP Secret (from SES Console → SMTP Settings)';
+    } else {
+        document.getElementById('cfg-smtp-user').placeholder = key === 'gmail' ? 'your@gmail.com' : 'your@outlook.com';
+        document.getElementById('cfg-smtp-pass').placeholder = key === 'gmail' ? 'App Password (16 chars, from Google Account)' : 'Your email password';
+    }
+    toast('Preset applied — fill in credentials and save.');
+}
+
+let _templates = {};
+async function loadTemplateEditor() {
+    const key = document.getElementById('tmpl-select').value;
+    if (!_templates[key]) {
+        const r = await api('GET', '/admin/email-templates');
+        if (r.ok) r.data.forEach(t => { _templates[t.templateKey] = t; });
+    }
+    const t = _templates[key];
+    if (t) {
+        document.getElementById('tmpl-subject').value = t.subject;
+        document.getElementById('tmpl-body').value    = t.bodyHtml;
+    }
+}
+
+async function saveTemplate() {
+    const key  = document.getElementById('tmpl-select').value;
+    const data = {
+        subject:  document.getElementById('tmpl-subject').value,
+        bodyHtml: document.getElementById('tmpl-body').value
+    };
+    const r = await api('PUT', `/admin/email-templates/${key}`, data);
+    if (r.ok) { toast('Template saved!'); _templates[key] = {...(_templates[key]||{}), ...data}; }
+    else toast(r.error, 'error');
+}
+
+// ============================================================
+// ADMIN CHANGE PASSWORD
+// ============================================================
+async function changeAdminPassword() {
+    const cur  = document.getElementById('adm-cur-pass').value;
+    const nw   = document.getElementById('adm-new-pass').value;
+    const conf = document.getElementById('adm-conf-pass').value;
+    const err  = document.getElementById('adm-pass-err');
+    err.style.display = 'none';
+    if (!cur || !nw || !conf) { err.textContent='All fields required.'; err.style.display='block'; return; }
+    if (nw !== conf) { err.textContent='New passwords do not match.'; err.style.display='block'; return; }
+    if (nw.length < 6) { err.textContent='Password must be at least 6 characters.'; err.style.display='block'; return; }
+    const r = await api('POST', '/admin/auth/change-password', { currentPassword: cur, newPassword: nw });
+    if (r.ok) { toast('Password updated!'); document.getElementById('adm-cur-pass').value=''; document.getElementById('adm-new-pass').value=''; document.getElementById('adm-conf-pass').value=''; }
+    else { err.textContent = r.error; err.style.display='block'; }
+}
+
+// ============================================================
+// PUSH NOTIFICATIONS (FCM)
+// ============================================================
+let _fcmConfig = null;
+
+async function loadFcmConfig() {
+    const r = await api('GET', '/admin/fcm/config');
+    if (!r.ok) return;
+    const d = r.data;
+    _fcmConfig = d;
+    if (d.projectId)  document.getElementById('fcm-project-id').value  = d.projectId  || '';
+    if (d.serverKey)  document.getElementById('fcm-server-key').value  = d.serverKey ? '••••••••' : '';
+    if (d.vapidKey)   document.getElementById('fcm-vapid-key').value   = d.vapidKey  ? '••••••••' : '';
+    if (d.apiKey)     document.getElementById('fcm-api-key').value     = d.apiKey    || '';
+    if (d.authDomain) document.getElementById('fcm-auth-domain').value = d.authDomain|| '';
+    if (d.appId)      document.getElementById('fcm-app-id').value      = d.appId     || '';
+    loadPushStats();
+    loadPushHistory();
+}
+
+async function saveFcmConfig() {
+    const payload = {
+        projectId:  document.getElementById('fcm-project-id').value.trim(),
+        serverKey:  document.getElementById('fcm-server-key').value.trim(),
+        vapidKey:   document.getElementById('fcm-vapid-key').value.trim(),
+        apiKey:     document.getElementById('fcm-api-key').value.trim(),
+        authDomain: document.getElementById('fcm-auth-domain').value.trim(),
+        appId:      document.getElementById('fcm-app-id').value.trim(),
+    };
+    // Don't overwrite masked values
+    if (payload.serverKey === '••••••••') delete payload.serverKey;
+    if (payload.vapidKey  === '••••••••') delete payload.vapidKey;
+    const r = await api('POST', '/admin/fcm/config', payload);
+    const el = document.getElementById('fcm-config-status');
+    el.style.display = 'block';
+    if (r.ok) {
+        el.style.background = 'var(--brand-bg)'; el.style.color = 'var(--brand)';
+        el.textContent = '✅ Firebase config saved successfully!';
+        toast('FCM config saved!');
+    } else {
+        el.style.background = 'var(--red-bg)'; el.style.color = 'var(--red)';
+        el.textContent = '❌ ' + r.error;
+        toast(r.error, 'error');
+    }
+}
+
+async function testFcmConfig() {
+    const el = document.getElementById('fcm-config-status');
+    el.style.display = 'block'; el.style.background = 'var(--blue-bg)'; el.style.color = 'var(--blue)';
+    el.textContent = '⏳ Testing FCM connection...';
+    const r = await api('POST', '/admin/fcm/test');
+    if (r.ok) {
+        el.style.background = 'var(--brand-bg)'; el.style.color = 'var(--brand)';
+        el.textContent = '✅ Firebase connected! Subscriber count: ' + (r.data.subscriberCount || 0);
+    } else {
+        el.style.background = 'var(--red-bg)'; el.style.color = 'var(--red)';
+        el.textContent = '❌ Connection failed: ' + r.error;
+    }
+}
+
+async function loadPushStats() {
+    const r = await api('GET', '/admin/fcm/stats');
+    if (!r.ok) return;
+    document.getElementById('pn-total-subs').textContent   = r.data.totalSubscribers  ?? '—';
+    document.getElementById('pn-partner-subs').textContent = r.data.partnerDevices     ?? '—';
+    document.getElementById('pn-sent-today').textContent   = r.data.sentToday          ?? '—';
+    document.getElementById('pn-open-rate').textContent    = r.data.openRate != null ? r.data.openRate + '%' : '—%';
+}
+
+async function loadPushHistory() {
+    const r = await api('GET', '/admin/fcm/history');
+    const tbody = document.getElementById('push-history-tbody');
+    if (!r.ok || !r.data.length) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--txt-4);padding:32px;">No notifications sent yet.</td></tr>';
+        return;
+    }
+    tbody.innerHTML = r.data.map(n => `
+        <tr>
+            <td style="font-weight:600;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${n.title}</td>
+            <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--txt-3);">${n.body}</td>
+            <td><span style="background:var(--brand-bg);color:var(--brand);padding:2px 8px;border-radius:99px;font-size:11px;font-weight:700;">${n.audience}</span></td>
+            <td style="font-weight:600;">${n.sentCount ?? 0}</td>
+            <td style="color:var(--brand);">${n.openedCount ?? 0}</td>
+            <td style="color:var(--txt-3);">${new Date(n.createdAt).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}</td>
+        </tr>`).join('');
+}
+
+function togglePnAudienceSelects() {
+    const v = document.getElementById('pn-audience').value;
+    document.getElementById('pn-specific-wrap').style.display = v === 'specific' ? '' : 'none';
+    document.getElementById('pn-role-wrap').style.display     = v === 'role'     ? '' : 'none';
+}
+
+function updatePnCharCount() {
+    const v = document.getElementById('pn-body').value.length;
+    document.getElementById('pn-char-count').textContent = v;
+}
+
+async function sendPushNotification() {
+    const title    = document.getElementById('pn-title').value.trim();
+    const body     = document.getElementById('pn-body').value.trim();
+    const audience = document.getElementById('pn-audience').value;
+    if (!title || !body) { toast('Title and body are required','error'); return; }
+    const payload = { title, body, audience,
+        clickUrl: document.getElementById('pn-url').value.trim() || null,
+        iconUrl:  document.getElementById('pn-icon').value.trim() || null,
+    };
+    if (audience === 'specific') payload.partnerId = document.getElementById('pn-specific-partner').value;
+    if (audience === 'role')     payload.roleId     = document.getElementById('pn-role-select').value;
+    const btn = document.getElementById('pn-send-btn');
+    btn.disabled = true; btn.textContent = 'Sending...';
+    const r = await api('POST', '/admin/fcm/send', payload);
+    btn.disabled = false; btn.innerHTML = '<svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Now';
+    if (r.ok) {
+        toast(`✅ Sent to ${r.data.successCount || 0} devices!`);
+        document.getElementById('pn-title').value = '';
+        document.getElementById('pn-body').value  = '';
+        loadPushStats(); loadPushHistory();
+    } else toast(r.error, 'error');
+}
+
+async function sendTestPushNotification() {
+    const adminUser = JSON.parse(localStorage.getItem('rd_user') || '{}');
+    const r = await api('POST', '/admin/fcm/send-test', { adminEmail: adminUser.email });
+    if (r.ok) toast('Test notification sent to your device!');
+    else toast(r.error || 'No FCM token found for your device. Open partner portal on your device first.', 'error');
+}
+
+function populatePnPartnerDropdown() {
+    const sel = document.getElementById('pn-specific-partner');
+    sel.innerHTML = '<option value="">— select partner —</option>' +
+        _allPartners.map(p => `<option value="${p.id}">${p.fullName} (${p.email})</option>`).join('');
+}
+
+function populatePnRoleDropdown() {
+    const sel = document.getElementById('pn-role-select');
+    // populated from _allRoles if exists, else via API
+    api('GET','/admin/roles').then(r => {
+        if (!r.ok) return;
+        sel.innerHTML = '<option value="">— select role —</option>' + r.data.map(x=>`<option value="${x.id}">${x.name}</option>`).join('');
+    });
+}
+
+// ============================================================
+// BACK OFFICE USERS
+// ============================================================
+const BO_MODULES = [
+    'Dashboard Analytics','Partner Management','Content Library',
+    'Upload Content','Category / AMC Master','Event Master',
+    'Plan & Promo Master','Role / RBAC','LMS Courses',
+    'Partner Approvals','Email Config','Push Notifications',
+    'Back Office Users','YouTube Auto-Sync','Reports & Export'
+];
+
+const BO_ROLE_TEMPLATES = {
+    operations:      ['Dashboard Analytics','Partner Management','Partner Approvals','Plan & Promo Master','Reports & Export'],
+    content_manager: ['Dashboard Analytics','Content Library','Upload Content','Category / AMC Master','LMS Courses','YouTube Auto-Sync'],
+    support:         ['Dashboard Analytics','Partner Management','Event Master','Email Config'],
+    custom:          []
+};
+
+let _boUsers = [];
+
+async function loadBoUsers() {
+    const r = await api('GET', '/admin/backoffice/users');
+    if (!r.ok) { _boUsers = []; return; }
+    _boUsers = r.data;
+    renderBoUsers(_boUsers);
+}
+
+function renderBoUsers(list) {
+    const tbody = document.getElementById('bo-users-tbody');
+    if (!list.length) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--txt-4);padding:32px;">No back office users. Add your first one →</td></tr>';
+        return;
+    }
+    tbody.innerHTML = list.map(u => {
+        const mods = (u.modules || []).slice(0,3).map(m=>`<span style="background:var(--blue-bg);color:var(--blue);padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600;margin-right:4px;">${m}</span>`).join('');
+        const more = u.modules?.length > 3 ? `<span style="font-size:11px;color:var(--txt-4);">+${u.modules.length-3} more</span>` : '';
+        return `<tr>
+            <td style="font-weight:600;">${u.name}</td>
+            <td style="color:var(--txt-3);">${u.email}</td>
+            <td><span style="background:var(--purple-bg);color:var(--purple);padding:2px 10px;border-radius:99px;font-size:11px;font-weight:700;">${u.roleName || u.role || '—'}</span></td>
+            <td>${mods}${more}</td>
+            <td><span style="background:${u.isActive?'var(--brand-bg)':'var(--red-bg)'};color:${u.isActive?'var(--brand)':'var(--red)'};padding:2px 10px;border-radius:99px;font-size:11px;font-weight:700;">${u.isActive?'Active':'Inactive'}</span></td>
+            <td>
+                <div style="display:flex;gap:6px;">
+                    <button class="btn-outline" style="padding:5px 10px;font-size:12px;" onclick="editBoUser(${u.id})">Edit</button>
+                    <button class="btn-outline" style="padding:5px 10px;font-size:12px;color:var(--${u.isActive?'amber':'brand'});" onclick="toggleBoUser(${u.id},${u.isActive})">${u.isActive?'Disable':'Enable'}</button>
+                    <button class="btn-outline" style="padding:5px 10px;font-size:12px;color:var(--red);" onclick="deleteBoUser(${u.id},'${u.name.replace(/'/g,"\'")}')">Delete</button>
+                </div>
+            </td>
+        </tr>`;
+    }).join('');
+}
+
+function filterBoUsers() {
+    const q = document.getElementById('bo-search').value.toLowerCase();
+    renderBoUsers(_boUsers.filter(u => u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q)));
+}
+
+function renderBoPermsGrid(selectedModules = []) {
+    const grid = document.getElementById('bo-perms-grid');
+    grid.innerHTML = BO_MODULES.map(m => `
+        <label class="bo-perm-chip">
+            <input type="checkbox" value="${m}" ${selectedModules.includes(m)?'checked':''}>
+            ${m}
+        </label>`).join('');
+}
+
+function applyBoRoleTemplate() {
+    const role = document.getElementById('bo-role').value;
+    const mods = BO_ROLE_TEMPLATES[role] || [];
+    document.querySelectorAll('#bo-perms-grid input[type=checkbox]').forEach(cb => {
+        cb.checked = mods.includes(cb.value);
+    });
+}
+
+function showBoForm(user = null) {
+    document.getElementById('bo-form-card').style.display = '';
+    document.getElementById('bo-form-title').textContent  = user ? 'Edit Back Office User' : 'Add Back Office User';
+    document.getElementById('bo-edit-id').value   = user?.id || '';
+    document.getElementById('bo-name').value      = user?.name || '';
+    document.getElementById('bo-email').value     = user?.email || '';
+    document.getElementById('bo-mobile').value    = user?.mobile || '';
+    document.getElementById('bo-password').value  = '';
+    document.getElementById('bo-pass-label').textContent = user ? 'New Password (leave blank to keep)' : 'Password';
+    document.getElementById('bo-role').value = user?.role || '';
+    renderBoPermsGrid(user?.modules || []);
+}
+
+function hideBoForm() {
+    document.getElementById('bo-form-card').style.display = 'none';
+}
+
+function editBoUser(id) {
+    const u = _boUsers.find(x => x.id === id);
+    if (u) showBoForm(u);
+}
+
+async function toggleBoUser(id, isActive) {
+    const r = await api('PATCH', `/admin/backoffice/users/${id}/toggle`);
+    if (r.ok) { toast(isActive ? 'User disabled' : 'User enabled'); loadBoUsers(); }
+    else toast(r.error, 'error');
+}
+
+async function deleteBoUser(id, name) {
+    if (!confirm(`Delete back office user "${name}"? This cannot be undone.`)) return;
+    const r = await api('DELETE', `/admin/backoffice/users/${id}`);
+    if (r.ok) { toast('User deleted'); loadBoUsers(); hideBoForm(); }
+    else toast(r.error, 'error');
+}
+
+async function saveBoUser() {
+    const id   = document.getElementById('bo-edit-id').value;
+    const name = document.getElementById('bo-name').value.trim();
+    const email= document.getElementById('bo-email').value.trim();
+    const mob  = document.getElementById('bo-mobile').value.trim();
+    const pass = document.getElementById('bo-password').value;
+    const role = document.getElementById('bo-role').value;
+    const modules = [...document.querySelectorAll('#bo-perms-grid input:checked')].map(c => c.value);
+    if (!name || !email) { toast('Name and email required','error'); return; }
+    if (!id && !pass)    { toast('Password required for new user','error'); return; }
+    if (modules.length === 0) { toast('Select at least one module','error'); return; }
+    const payload = { name, email, mobile: mob, role, modules };
+    if (pass) payload.password = pass;
+    const r = await api(id ? 'PUT' : 'POST', id ? `/admin/backoffice/users/${id}` : '/admin/backoffice/users', payload);
+    if (r.ok) { toast(id ? 'User updated!' : 'User created!'); loadBoUsers(); hideBoForm(); }
+    else toast(r.error, 'error');
+}
+
+
+</script>
+</body>
+</html>

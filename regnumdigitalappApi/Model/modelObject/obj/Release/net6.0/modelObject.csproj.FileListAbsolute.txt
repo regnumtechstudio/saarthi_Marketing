@@ -1,0 +1,36 @@
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\bin\Release\net6.0\modelObject.deps.json
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\bin\Release\net6.0\modelObject.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\bin\Release\net6.0\modelObject.pdb
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.csproj.AssemblyReference.cache
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.GeneratedMSBuildEditorConfig.editorconfig
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.AssemblyInfoInputs.cache
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.AssemblyInfo.cs
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.csproj.CoreCompileInputs.cache
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\refint\modelObject.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.pdb
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\ref\modelObject.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\bin\Release\net6.0\modelObject.deps.json
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\bin\Release\net6.0\modelObject.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\bin\Release\net6.0\modelObject.pdb
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.csproj.AssemblyReference.cache
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.GeneratedMSBuildEditorConfig.editorconfig
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.AssemblyInfoInputs.cache
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.AssemblyInfo.cs
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.csproj.CoreCompileInputs.cache
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\refint\modelObject.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.pdb
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\ref\modelObject.dll
+C:\Users\HP\Documents\IPMsg\AutoSave\regnumdigitalappApi_18_05_2026\regnumdigitalappApi\Model\modelObject\bin\Release\net6.0\modelObject.deps.json
+C:\Users\HP\Documents\IPMsg\AutoSave\regnumdigitalappApi_18_05_2026\regnumdigitalappApi\Model\modelObject\bin\Release\net6.0\modelObject.dll
+C:\Users\HP\Documents\IPMsg\AutoSave\regnumdigitalappApi_18_05_2026\regnumdigitalappApi\Model\modelObject\bin\Release\net6.0\modelObject.pdb
+C:\Users\HP\Documents\IPMsg\AutoSave\regnumdigitalappApi_18_05_2026\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.csproj.AssemblyReference.cache
+C:\Users\HP\Documents\IPMsg\AutoSave\regnumdigitalappApi_18_05_2026\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\Documents\IPMsg\AutoSave\regnumdigitalappApi_18_05_2026\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.AssemblyInfoInputs.cache
+C:\Users\HP\Documents\IPMsg\AutoSave\regnumdigitalappApi_18_05_2026\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.AssemblyInfo.cs
+C:\Users\HP\Documents\IPMsg\AutoSave\regnumdigitalappApi_18_05_2026\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.csproj.CoreCompileInputs.cache
+C:\Users\HP\Documents\IPMsg\AutoSave\regnumdigitalappApi_18_05_2026\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.dll
+C:\Users\HP\Documents\IPMsg\AutoSave\regnumdigitalappApi_18_05_2026\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\refint\modelObject.dll
+C:\Users\HP\Documents\IPMsg\AutoSave\regnumdigitalappApi_18_05_2026\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\modelObject.pdb
+C:\Users\HP\Documents\IPMsg\AutoSave\regnumdigitalappApi_18_05_2026\regnumdigitalappApi\Model\modelObject\obj\Release\net6.0\ref\modelObject.dll
