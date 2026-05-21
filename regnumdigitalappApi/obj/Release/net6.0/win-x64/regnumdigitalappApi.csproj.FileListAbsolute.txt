@@ -1,0 +1,148 @@
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\appsettings.Development.json
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\appsettings.json
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\regnumdigitalappApi.exe
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\regnumdigitalappApi.deps.json
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\regnumdigitalappApi.runtimeconfig.json
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\regnumdigitalappApi.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\regnumdigitalappApi.pdb
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\BCrypt.Net-Next.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Dapper.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\EntityFramework.SqlServer.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\EntityFramework.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Google.Protobuf.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\K4os.Compression.LZ4.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\K4os.Compression.LZ4.Streams.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\K4os.Hash.xxHash.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.EntityFrameworkCore.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.EntityFrameworkCore.Relational.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.IdentityModel.Abstractions.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.IdentityModel.Logging.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.IdentityModel.Protocols.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.IdentityModel.Tokens.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.OpenApi.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.Win32.SystemEvents.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\MySql.Data.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\MySqlConnector.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Pomelo.EntityFrameworkCore.MySql.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\BouncyCastle.Crypto.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Swashbuckle.AspNetCore.Swagger.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.CodeDom.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.Configuration.ConfigurationManager.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.Data.SqlClient.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.Drawing.Common.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.IdentityModel.Tokens.Jwt.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.IO.Pipelines.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.Security.Cryptography.ProtectedData.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.Security.Permissions.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.Text.Encodings.Web.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.Text.Json.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.Windows.Extensions.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\comerr64.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\gssapi64.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\k5sprt64.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\krb5_64.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\krbcc64.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\sni.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\modelObject.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\modelObject.pdb
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.csproj.AssemblyReference.cache
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.AssemblyInfoInputs.cache
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.AssemblyInfo.cs
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.csproj.CoreCompileInputs.cache
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.MvcApplicationPartsAssemblyInfo.cs
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.MvcApplicationPartsAssemblyInfo.cache
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\staticwebassets\msbuild.regnumdigitalappApi.Microsoft.AspNetCore.StaticWebAssets.props
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\staticwebassets\msbuild.build.regnumdigitalappApi.props
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\staticwebassets\msbuild.buildMultiTargeting.regnumdigitalappApi.props
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\staticwebassets\msbuild.buildTransitive.regnumdigitalappApi.props
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\staticwebassets.pack.json
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\staticwebassets.build.json
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\staticwebassets.development.json
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\scopedcss\bundle\regnumdigitalappApi.styles.css
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.csproj.CopyComplete
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\refint\regnumdigitalappApi.dll
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.pdb
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.genruntimeconfig.cache
+C:\work\RTA Project\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\ref\regnumdigitalappApi.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\appsettings.Development.json
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\appsettings.json
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\regnumdigitalappApi.exe
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\regnumdigitalappApi.deps.json
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\regnumdigitalappApi.runtimeconfig.json
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\regnumdigitalappApi.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\regnumdigitalappApi.pdb
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\BCrypt.Net-Next.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Dapper.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\EntityFramework.SqlServer.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\EntityFramework.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Google.Protobuf.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\K4os.Compression.LZ4.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\K4os.Compression.LZ4.Streams.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\K4os.Hash.xxHash.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.EntityFrameworkCore.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.EntityFrameworkCore.Abstractions.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.EntityFrameworkCore.Relational.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.IdentityModel.Abstractions.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.IdentityModel.JsonWebTokens.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.IdentityModel.Logging.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.IdentityModel.Protocols.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.IdentityModel.Tokens.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.OpenApi.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Microsoft.Win32.SystemEvents.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\MySql.Data.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\MySqlConnector.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Pomelo.EntityFrameworkCore.MySql.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\BouncyCastle.Crypto.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Swashbuckle.AspNetCore.Swagger.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Swashbuckle.AspNetCore.SwaggerGen.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\Swashbuckle.AspNetCore.SwaggerUI.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.CodeDom.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.Configuration.ConfigurationManager.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.Data.SqlClient.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.Drawing.Common.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.IdentityModel.Tokens.Jwt.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.IO.Pipelines.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.Security.Cryptography.ProtectedData.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.Security.Permissions.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.Text.Encodings.Web.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.Text.Json.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\System.Windows.Extensions.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\comerr64.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\gssapi64.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\k5sprt64.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\krb5_64.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\krbcc64.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\sni.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\modelObject.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\bin\Release\net6.0\win-x64\modelObject.pdb
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.csproj.AssemblyReference.cache
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.GeneratedMSBuildEditorConfig.editorconfig
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.AssemblyInfoInputs.cache
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.AssemblyInfo.cs
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.csproj.CoreCompileInputs.cache
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.MvcApplicationPartsAssemblyInfo.cs
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.MvcApplicationPartsAssemblyInfo.cache
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\staticwebassets\msbuild.regnumdigitalappApi.Microsoft.AspNetCore.StaticWebAssets.props
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\staticwebassets\msbuild.build.regnumdigitalappApi.props
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\staticwebassets\msbuild.buildMultiTargeting.regnumdigitalappApi.props
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\staticwebassets\msbuild.buildTransitive.regnumdigitalappApi.props
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\staticwebassets.pack.json
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\staticwebassets.build.json
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\staticwebassets.development.json
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\scopedcss\bundle\regnumdigitalappApi.styles.css
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.csproj.CopyComplete
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\refint\regnumdigitalappApi.dll
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.pdb
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\regnumdigitalappApi.genruntimeconfig.cache
+\\DESKTOP-VEM31EJ\regnumdigitalappApi\regnumdigitalappApi\obj\Release\net6.0\win-x64\ref\regnumdigitalappApi.dll
