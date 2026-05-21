@@ -28,7 +28,7 @@ public record SavePlanRequest(string Name, decimal MonthlyPrice, decimal YearlyP
 
 // ── PROMO ────────────────────────────────────────────────────
 public record PromoDto(int Id, string Code, string DiscountType, decimal DiscountValue, int? MaxUses, int UsedCount, DateTime? ExpiresAt, bool IsActive);
-public record SavePromoRequest(string Code, string DiscountType, decimal DiscountValue, int? MaxUses, DateTime? ExpiresAt,int PerUserLimit,bool IsVisibleOnCheckout,string VisibleDescription);
+public record SavePromoRequest(string Code, string DiscountType, decimal DiscountValue, int? MaxUses, DateTime? ExpiresAt,int? PerUserLimit,int IsVisibleOnCheckout,string? VisibleDescription);
 
 // ── EVENT ────────────────────────────────────────────────────
 public record EventDto(int Id, string Title, string EventType, DateTime EventDate, string? SpeakerName, string? LocationLink, string Status);
