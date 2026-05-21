@@ -72,7 +72,7 @@ public class Partner
     [Column("created_at")] public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public Role? Role { get; set; }
     public Plan? Plan { get; set; }
-    public string? Status { get; set; }
+    public string Status { get; set; } = "Active";
   public bool IsFirstLogin { get; set; } = true;
     public  DateTime? LastLoginAt { get; set; }
   public bool CobrandSetupDone { get; set; } = true;
@@ -100,13 +100,14 @@ public class PromoCode
     [Column("max_uses")] public int? MaxUses { get; set; }
     [Column("used_count")] public int UsedCount { get; set; } = 0;
     [Column("expires_at")] public DateTime? ExpiresAt { get; set; }
-    [Column("is_active")] public bool IsActive { get; set; } = true;
+    [Column("is_active")] public int IsActive { get; set; } =1;
     [Column("created_at")] public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public int? CurrentUses { get; set; }
-    public int PerUserLimit { get; set; }
-    public bool IsVisibleOnCheckout { get; set; } = true;
-    public string ApplicablePlansJson { get; set; }
-    public string VisibleDescription { get; set; } 
+   // [Column("update_at")] public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    public int CurrentUses { get; set; } = 0;
+    public int? PerUserLimit { get; set; } 
+    public int IsVisibleOnCheckout { get; set; } = 0;
+    public string? ApplicablePlansJson { get; set; }
+    public string? VisibleDescription { get; set; } 
 }
 
 public class CheckoutOrder

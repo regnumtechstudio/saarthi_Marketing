@@ -62,8 +62,8 @@ namespace regnumdigitalappApi.Controllers.API.Controllers
         {
             var now = DateTime.UtcNow;
             var promos = await _db.PromoCodes
-                .Where(p => p.IsActive
-                    && p.IsVisibleOnCheckout
+                .Where(p => p.IsActive == 1
+                    && p.IsVisibleOnCheckout == 1 
                     && (p.ExpiresAt == null || p.ExpiresAt > now)
                     && (p.MaxUses == null || p.CurrentUses < p.MaxUses))
                 .ToListAsync();
@@ -426,94 +426,94 @@ namespace regnumdigitalappApi.Controllers.API.Controllers
         }
     }
 
-    // ============================================================
-    // ADMIN — PROMOS CONTROLLER
-    // ============================================================
-    [Route("api/admin/promos")]
-    [Authorize(Policy = "AdminOnly")]
-    public class AdminPromosController : BaseController
-    {
-        private readonly AppDbContext _db;
-        public AdminPromosController(AppDbContext db) => _db = db;
+    //// ============================================================
+    //// ADMIN — PROMOS CONTROLLER
+    //// ============================================================
+    //[Route("api/admin/promos")]
+    //[Authorize(Policy = "AdminOnly")]
+    //public class AdminPromosController : BaseController
+    //{
+    //    private readonly AppDbContext _db;
+    //    public AdminPromosController(AppDbContext db) => _db = db;
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var promos = await _db.PromoCodes.OrderByDescending(p => p.Id).ToListAsync();
-            return Ok2(promos.Select(p => new {
-                p.Id,
-                p.Code,
-                p.DiscountType,
-                p.DiscountValue,
-                p.ExpiresAt,
-                p.MaxUses,
-                p.CurrentUses,
-                usedCount = p.CurrentUses,
-                p.IsActive,
-                p.IsVisibleOnCheckout,
-                p.VisibleDescription,
-                p.PerUserLimit,
-                applicablePlanIds = p.ApplicablePlansJson != null
-                    ? JsonSerializer.Deserialize<int[]>(p.ApplicablePlansJson)
-                    : null
-            }));
-        }
+    //    [HttpGet]
+    //    public async Task<IActionResult> GetAll()
+    //    {
+    //        var promos = await _db.PromoCodes.OrderByDescending(p => p.Id).ToListAsync();
+    //        return Ok2(promos.Select(p => new {
+    //            p.Id,
+    //            p.Code,
+    //            p.DiscountType,
+    //            p.DiscountValue,
+    //            p.ExpiresAt,
+    //            p.MaxUses,
+    //            p.CurrentUses,
+    //            usedCount = p.CurrentUses,
+    //            p.IsActive,
+    //            p.IsVisibleOnCheckout,
+    //            p.VisibleDescription,
+    //            p.PerUserLimit,
+    //            applicablePlanIds = p.ApplicablePlansJson != null
+    //                ? JsonSerializer.Deserialize<int[]>(p.ApplicablePlansJson)
+    //                : null
+    //        }));
+    //    }
 
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] SavePromoRequest req)
-        {
-            if (string.IsNullOrWhiteSpace(req.Code))
-                return Err("Promo code is required.");
-            if (req.DiscountType == "percentage" && req.DiscountValue > 100)
-                return Err("Percentage discount cannot exceed 100.");
+    //    [HttpPost]
+    //    public async Task<IActionResult> Create([FromBody] SavePromoRequest req)
+    //    {
+    //        if (string.IsNullOrWhiteSpace(req.Code))
+    //            return Err("Promo code is required.");
+    //        if (req.DiscountType == "percentage" && req.DiscountValue > 100)
+    //            return Err("Percentage discount cannot exceed 100.");
 
-            var exists = await _db.PromoCodes.AnyAsync(p => p.Code == req.Code.ToUpper());
-            if (exists) return Err("Promo code already exists.");
+    //        var exists = await _db.PromoCodes.AnyAsync(p => p.Code == req.Code.ToUpper());
+    //        if (exists) return Err("Promo code already exists.");
 
-            DateTime? expiresAt = null;
-      if (!string.IsNullOrEmpty(Convert.ToString(req.ExpiresAt))) ;
-               // expiresAt = DateTime.Parse(req.ExpiresAt).ToUniversalTime();
+    //        DateTime? expiresAt = null;
+    //  if (!string.IsNullOrEmpty(Convert.ToString(req.ExpiresAt))) ;
+    //           // expiresAt = DateTime.Parse(req.ExpiresAt).ToUniversalTime();
 
-            var promo = new PromoCode
-            {
-                Code = req.Code.ToUpper(),
-                DiscountType = req.DiscountType,
-                DiscountValue = req.DiscountValue,
-                ExpiresAt = expiresAt,
-                MaxUses = req.MaxUses,
-                PerUserLimit = req.PerUserLimit,
-                IsActive = true,
-                IsVisibleOnCheckout = req.IsVisibleOnCheckout,
-                VisibleDescription = req.VisibleDescription,
-                //ApplicablePlansJson = req.ApplicablePlanIds?.Length > 0
-                //    ? JsonSerializer.Serialize(req.ApplicablePlanIds)
-                //    : null
-            };
-            _db.PromoCodes.Add(promo);
-            await _db.SaveChangesAsync();
-            return Ok2(new { promo.Id, message = "Promo created." });
-        }
+    //        var promo = new PromoCode
+    //        {
+    //            Code = req.Code.ToUpper(),
+    //            DiscountType = req.DiscountType,
+    //            DiscountValue = req.DiscountValue,
+    //            ExpiresAt = expiresAt,
+    //            MaxUses = req.MaxUses,
+    //            PerUserLimit = req.PerUserLimit,
+    //            IsActive = true,
+    //            IsVisibleOnCheckout = req.IsVisibleOnCheckout,
+    //            VisibleDescription = req.VisibleDescription,
+    //            //ApplicablePlansJson = req.ApplicablePlanIds?.Length > 0
+    //            //    ? JsonSerializer.Serialize(req.ApplicablePlanIds)
+    //            //    : null
+    //        };
+    //        _db.PromoCodes.Add(promo);
+    //        await _db.SaveChangesAsync();
+    //        return Ok2(new { promo.Id, message = "Promo created." });
+    //    }
 
-        [HttpPut("{id}/deactivate")]
-        public async Task<IActionResult> Deactivate(int id)
-        {
-            var promo = await _db.PromoCodes.FindAsync(id);
-            if (promo == null) return NotFound();
-            promo.IsActive = false;
-            await _db.SaveChangesAsync();
-            return Ok2(new { message = "Deactivated." });
-        }
+    //    [HttpPut("{id}/deactivate")]
+    //    public async Task<IActionResult> Deactivate(int id)
+    //    {
+    //        var promo = await _db.PromoCodes.FindAsync(id);
+    //        if (promo == null) return NotFound();
+    //        promo.IsActive = false;
+    //        await _db.SaveChangesAsync();
+    //        return Ok2(new { message = "Deactivated." });
+    //    }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var promo = await _db.PromoCodes.FindAsync(id);
-            if (promo == null) return NotFound();
-            _db.PromoCodes.Remove(promo);
-            await _db.SaveChangesAsync();
-            return Ok2(new { message = "Deleted." });
-        }
-    }
+    //    [HttpDelete("{id}")]
+    //    public async Task<IActionResult> Delete(int id)
+    //    {
+    //        var promo = await _db.PromoCodes.FindAsync(id);
+    //        if (promo == null) return NotFound();
+    //        _db.PromoCodes.Remove(promo);
+    //        await _db.SaveChangesAsync();
+    //        return Ok2(new { message = "Deleted." });
+    //    }
+    //}
 
     // ============================================================
     // ADMIN — SUBSCRIPTIONS CONTROLLER

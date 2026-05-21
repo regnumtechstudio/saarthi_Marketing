@@ -7,6 +7,7 @@ using RegnumDigital.API.DTOs;
 using RegnumDigital.API.Models;
 using RegnumDigital.API.Services;
 using System.Linq;
+using System.Text.Json;
 
 namespace RegnumDigital.API.Controllers;
 
@@ -159,14 +160,38 @@ public class AdminPromosController : ControllerBase
     private readonly AppDbContext _db;
     public AdminPromosController(AppDbContext db) => _db = db;
 
+    //[HttpGet]
+    //public async Task<IActionResult> GetAll()
+    //{
+    //    var list = await _db.PromoCodes.ToListAsync();
+    //    return Ok(list.Select(p => new PromoDto(p.Id, p.Code, p.DiscountType, p.DiscountValue,
+    //            p.MaxUses, p.UsedCount, p.ExpiresAt, p.IsActive))
+    //        .OrderByDescending(p => p.Id));
+    //}
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var list = await _db.PromoCodes.ToListAsync();
-        return Ok(list.Select(p => new PromoDto(p.Id, p.Code, p.DiscountType, p.DiscountValue,
-                p.MaxUses, p.UsedCount, p.ExpiresAt, p.IsActive))
-            .OrderByDescending(p => p.Id));
+        var promos = await _db.PromoCodes.OrderByDescending(p => p.Id).ToListAsync();
+        return Ok(promos.Select(p => new
+        {
+            p.Id,
+            p.Code,
+            p.DiscountType,
+            p.DiscountValue,
+            p.ExpiresAt,
+            p.MaxUses,
+            p.CurrentUses,
+            usedCount = p.CurrentUses,
+            p.IsActive,
+            p.IsVisibleOnCheckout,
+            p.VisibleDescription,
+            p.PerUserLimit,
+            applicablePlanIds = p.ApplicablePlansJson != null
+                ? JsonSerializer.Deserialize<int[]>(p.ApplicablePlansJson)
+                : null
+        }));
     }
+
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] SavePromoRequest req)
@@ -191,7 +216,7 @@ public class AdminPromosController : ControllerBase
     {
         var p = await _db.PromoCodes.FindAsync(id);
         if (p == null) return NotFound(new { message = "Promo not found." });
-        p.IsActive = false;
+        p.IsActive = 0;
         await _db.SaveChangesAsync();
         return Ok(new { message = "Promo deactivated." });
     }
